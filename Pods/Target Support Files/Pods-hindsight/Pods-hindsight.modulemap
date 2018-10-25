@@ -1,0 +1,6 @@
+framework module Pods_hindsight {
+  umbrella header "Pods-hindsight-umbrella.h"
+
+  export *
+  module * { export * }
+}
