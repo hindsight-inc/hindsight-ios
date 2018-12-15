@@ -8,7 +8,7 @@
 
 import XCTest
 
-class hindsightUITests: XCTestCase {
+class HindsightUITests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

@@ -1,0 +1,22 @@
+/* 
+  File.strings
+  hindsight
+
+  Created by Sanwal, Manish on 10/16/18.
+  Copyright © 2018 hindsight-inc. All rights reserved.
+*/
+
+"Non_UI.network.auth.register.api" = "/user/register";
+"Non_UI.network.auth.register.param.username" = "username";
+"Non_UI.network.auth.register.param.password" = "password";
+"Non_UI.network.user.login.sample_Response" = "register";
+
+"Non_UI.network.auth.login.api" = "/user/login";
+"Non_UI.network.auth.login.param.username" = "username";
+"Non_UI.network.auth.login.param.password" = "password";
+"Non_UI.network.auth.login.sample_Response" = "login";
+
+"Non_UI.network.auth.refresh.api" = "/token/refresh";
+"Non_UI.network.auth.refresh.sample_Response" = "sample_login";
+
+"Button.text.facebookLogin" = "Login With Facebook";

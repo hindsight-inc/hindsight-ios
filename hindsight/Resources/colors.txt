@@ -1,0 +1,55 @@
+# Dollar Values
+# Interstate-ExtraLight, 70/35/32/16/13px
+DollarValue             : #FFFFFF
+DollarValueAlt          : #323232
+DollarValueCellLabel    : #0077BB
+# Header
+# Interstate-Light, 35/19/16/13px
+Header            : #FFFFFF
+HeaderAlt1        : #323232
+HeaderAlt2        : #008A24
+
+# Navbar
+NavBar            : #654B90
+NavBarBlackText   : #000000
+
+# TabBar
+TabBarSelected    : #004785
+TabBarUnselected  : #979797
+TabBarBorder      : #C9C9CE
+# Body
+# Interstate-Light, Interstate-Regular, 16px
+
+Body              : #FFFFFF
+BodyAlt1          : #323232
+BodyAlt2          : #CCCCCC
+
+# Background
+Background        : #F5F5F5
+
+# Labels
+# Interstate-Light, 22/16/13/12px
+
+Label             : #323232
+LabelAlt1         : #767676
+LabelAlt2         : #CCCCCC
+ 
+# LoginButton
+FacebookButtonStateNormal    : #3C5A98
+FacebookButtonStateHighlight : #304878
+
+# Hindsight Colors
+
+HindsightTheme	       : #654B90
+HindsightBlue          : #002D72
+HindsightRed           : #FF0000
+HindsightLightRed      : #FF3333
+HindsightDarkRed       : #4A0518
+HindsightHeaderBlue90  : #003378
+HindsightDarkGray      : #323232
+HindsightMedGray       : #767676
+HindsightLightGray     : #BFC8D6
+HindsightDMMGreen      : #008A24
+HindsightLightGreen    : #A5F8BA
+HindsightAntiqueWhite  : #faebd7
+HindsightWhite         : #ffffff

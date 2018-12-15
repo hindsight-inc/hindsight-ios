@@ -2,6 +2,8 @@
  platform :ios, '10.0'
 
 def testing_pods
+    pod 'Quick'
+    pod 'Nimble'
     pod 'RxSwift'
     pod 'RxBlocking'
     pod 'RxTest'
@@ -21,6 +23,7 @@ target 'hindsight' do
   pod 'Swinject'
   pod 'SnapKit'
   pod 'SwiftLint'
+  pod 'RealmSwift'
   
    target 'hindsightTests' do
     inherit!  :search_paths
