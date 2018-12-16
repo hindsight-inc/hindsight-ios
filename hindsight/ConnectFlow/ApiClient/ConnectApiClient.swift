@@ -8,10 +8,15 @@
 
 import Foundation
 protocol ConnectApiClientProtocol {
-
+	func connect()
 }
 
 struct ConnectApiClient: ConnectApiClientProtocol {
 
     let networkProvider: NetworkProviderProtocol
+
+	func connect() {
+		// why no network call is made?
+		_ = networkProvider.connectFacebook(token: "123")
+	}
 }

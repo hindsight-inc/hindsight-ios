@@ -16,7 +16,7 @@ struct DependencyConfigurator {
     /// - Parameter container: a swinject container
     static func registerCoreDependencies(container: Container) {
         container.register(NetworkProviderProtocol.self) { _ in
-            NetworkProvider(sourceBehaviour: .local)
+            NetworkProvider(sourceBehaviour: .stubbed)
         }
     }
 

@@ -65,13 +65,13 @@ enum SourceBehaviour {
     func baseUrl() -> URL {
         switch self {
         case .prod:
-            return URL(string: "google.com")!
+            return URL(string: "superarts.ddns.net:18182")!
         case .local:
-            return URL(string: "google.com")!
+			return URL(string: "localhost:18182")!
         case .mock:
-            return URL(string: "google.com")!
+            return URL(string: "localhost:18182")!
         case .stubbed:
-            return URL(string: "google.com")!
+            return URL(string: "superarts.ddns.net:18182")!
         }
     }
 }
@@ -92,6 +92,12 @@ protocol NetworkProviderProtocol {
     /// - Parameter user: user credentials
     /// - Returns: Single<Result<Bool>>
     func login(user: UserCredentialsProtocol) -> Single<NetworkResult>
+
+	/// Connect User
+	///
+	/// - Parameter token: access token
+	/// - Returns: Single<Result<Bool>>
+	func connectFacebook(token: String) -> Single<NetworkResult>
 
     /// get a list of topics
     ///
@@ -123,12 +129,21 @@ struct NetworkProvider: NetworkProviderProtocol {
         return webServiceRequest(method: AuthEndpoint.register(userName: user.userName, password: user.password))
     }
 
-    /// Login User
+	/// Login User
+	///
+	/// - Parameter user: user credentials
+	/// - Returns: Single<Result<Bool>>
+	func login(user: UserCredentialsProtocol) -> Single<NetworkResult> {
+		return webServiceRequest(method: AuthEndpoint.login(userName: user.userName, password: user.password))
+	}
+
+    /// Connect User
     ///
-    /// - Parameter user: user credentials
+    /// - Parameter token: access token
     /// - Returns: Single<Result<Bool>>
-    func login(user: UserCredentialsProtocol) -> Single<NetworkResult> {
-        return webServiceRequest(method: AuthEndpoint.login(userName: user.userName, password: user.password))
+    func connectFacebook(token: String) -> Single<NetworkResult> {
+		print("Connecting to facebook...")
+        return webServiceRequest(method: AuthEndpoint.connect(accessToken: token))
     }
 
     /// get a list of topics
@@ -167,6 +182,7 @@ extension NetworkProvider {
             .request(method)
             .debug()
             .map { (response) -> NetworkResult in
+				print(response)
                 var json: Any?
                 do {
                     let response = try response.filterSuccessfulStatusCodes()

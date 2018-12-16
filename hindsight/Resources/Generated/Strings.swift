@@ -22,6 +22,20 @@ internal enum Constants {
   internal enum NonUI {
     internal enum Network {
       internal enum Auth {
+        internal enum Connect {
+          /// /user/connect
+          internal static let api = Constants.tr("Localizable", "Non_UI.network.auth.connect.api")
+          internal enum Param {
+            /// method
+            internal static let accessToken = Constants.tr("Localizable", "Non_UI.network.auth.connect.param.access_token")
+            /// method
+            internal static let method = Constants.tr("Localizable", "Non_UI.network.auth.connect.param.method")
+            internal enum Methods {
+              /// facebook
+              internal static let facebook = Constants.tr("Localizable", "Non_UI.network.auth.connect.param.methods.facebook")
+            }
+          }
+        }
         internal enum Login {
           /// /user/login
           internal static let api = Constants.tr("Localizable", "Non_UI.network.auth.login.api")

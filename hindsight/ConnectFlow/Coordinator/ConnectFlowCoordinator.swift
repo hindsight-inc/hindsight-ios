@@ -19,6 +19,8 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
     internal let presenter: Presenting
 
     private let container: Container
+	// who owns API client?
+	private let client: ConnectApiClientProtocol
 
     private let navigationController: UINavigationController
 
@@ -27,10 +29,14 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
         self.container = container
         self.navigationController = nc
         DependencyConfigurator.registerConnectFlowDependencies(container: container)
+
+		client = container.resolveUnwrapped(ConnectApiClientProtocol.self)
     }
 
     func presentLogInAsRoot(nc: UINavigationController) {
-        let vm = LoginViewModel(facebookConnectClosure: {})
+        let vm = LoginViewModel(facebookConnectClosure: {
+			self.client.connect()
+		})
         let vc = LoginViewController(viewModel: vm)
         navigationController.isNavigationBarHidden = true
         presenter.makeRoot(vc: vc, nc: navigationController)
