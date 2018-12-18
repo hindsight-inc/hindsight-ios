@@ -35,6 +35,7 @@ struct DependencyConfigurator {
     /// - Parameter container: a swinject container
     static func registerDetailFlowDependencies(container: Container) {
         let nwProvider = container.resolveUnwrapped(NetworkProviderProtocol.self)
+        print(nwProvider)
     }
 
     /// Register dependencies for create flow
@@ -42,5 +43,6 @@ struct DependencyConfigurator {
     /// - Parameter container: a swinject container
     static func registerCreateFlowDependencies(container: Container) {
         let nwProvider = container.resolveUnwrapped(NetworkProviderProtocol.self)
+        print(nwProvider)
     }
 }
