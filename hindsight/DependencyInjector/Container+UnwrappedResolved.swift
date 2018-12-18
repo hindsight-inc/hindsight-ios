@@ -11,8 +11,9 @@ import Swinject
 
 // swiftlint:disable force_unwrapping
 extension Resolver {
-    /// Resolve a given `Service.Type` to the registered Service. This method will `fatalError` if no `Service` is registered
-    /// for `Service.Type`, rather than the default which will return an implicitly unwrapped optional
+    /// Resolve a given `Service.Type` to the registered Service.
+    /// This method will `fatalError` if no `Service` is registered for `Service.Type`,
+    /// rather than the default which will return an implicitly unwrapped optional.
     ///
     /// - Parameter type: A given `Service.Type` which needs to be resolved to a concrete instance
     /// - Returns: An instance of `Service` that the `Service.Type` is registered for

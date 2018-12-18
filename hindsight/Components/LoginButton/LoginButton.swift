@@ -74,7 +74,7 @@ class LoginButton: UIView {
 
     private func setUpUI() {
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self,
-                                                                      action: #selector(self.handleLongPressGestureRecognizer))
+            action: #selector(self.handleLongPressGestureRecognizer))
         longPressGestureRecognizer.minimumPressDuration = 0
         addSubview(titleLabel)
         addSubview(imageView)

@@ -100,7 +100,8 @@ class BaseFlowCoordinator: PresenterProviding {
         // Temporary location for UI appearance setup
         rootNavigationController.navigationBar.isTranslucent = false
         UINavigationBar.appearance().barTintColor = ColorName.hindsightTheme.color
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: ColorName.hindsightWhite.color/*,
-             NSFontAttributeName: FontFamily.Interstate.regular.font(size: 16.0)*/]
+        UINavigationBar.appearance().titleTextAttributes =
+            [NSAttributedString.Key.foregroundColor: ColorName.hindsightWhite.color]
+        // font - NSFontAttributeName: FontFamily.Interstate.regular.font(size: 16.0)
     }
 }
