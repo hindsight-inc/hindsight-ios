@@ -36,28 +36,33 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 
     func presentLogInAsRoot(nc: UINavigationController) {
         let vm = LoginViewModel(facebookConnectClosure: {
-			self.client.connect()
-            //self.facebookLoginTest()
+            self.facebookLoginTest()
 		})
         let vc = LoginViewController(viewModel: vm)
         navigationController.isNavigationBarHidden = true
         presenter.makeRoot(vc: vc, nc: navigationController)
     }
 
+    private let loginManager = FBSDKLoginManager()
     private func facebookLoginTest() {
-        let loginManager = FBSDKLoginManager()
-        loginManager.logIn(withReadPermissions: ["public_profile", "user_friends", "email"], from: navigationController) { loginResult, error in
-            /*
-            switch loginResult {
-            case .Failed(let error):
+
+        loginManager.logIn(withReadPermissions: ["public_profile", "user_friends", "email"],
+            from: navigationController) { loginResult, error in
+
+            if let error = error {
                 print(error)
-            case .Cancelled:
-                print("User cancelled login.")
-            case .Success(let grantedPermissions, let declinedPermissions, let accessToken):
-                print("Logged in!")
+                return
             }
-            */
-            print(loginResult, error)
+            guard let result = loginResult else {
+                print("invalid result")
+                return
+            }
+            guard let token = result.token else {
+                print("invalid token")
+                return
+            }
+            print(result, token)
+            self.client.connect(token: token.tokenString)
         }
     }
 }

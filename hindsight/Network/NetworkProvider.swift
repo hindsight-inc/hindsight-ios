@@ -142,7 +142,7 @@ struct NetworkProvider: NetworkProviderProtocol {
     /// - Parameter token: access token
     /// - Returns: Single<Result<Bool>>
     func connectFacebook(token: String) -> Single<NetworkResult> {
-		print("Connecting to facebook...")
+		print("Connecting to facebook...", token)
         return webServiceRequest(method: AuthEndpoint.connect(accessToken: token))
     }
 

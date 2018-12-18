@@ -107,6 +107,7 @@
 		D7AB948399AB4587E52B8D53 /* Pods-hindsight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hindsight.release.xcconfig"; path = "Pods/Target Support Files/Pods-hindsight/Pods-hindsight.release.xcconfig"; sourceTree = "<group>"; };
 		DB48E6B288FD364AF7DE767C /* Pods_hindsightUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hindsightUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEDA2805082F3CAF704E7DD8 /* Pods-hindsightTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hindsightTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hindsightTests/Pods-hindsightTests.release.xcconfig"; sourceTree = "<group>"; };
+		FA65B5E021C9A2B900FCBCA5 /* hindsight.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = hindsight.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +173,7 @@
 		13BA21DB217278F900064C03 /* hindsight */ = {
 			isa = PBXGroup;
 			children = (
+				FA65B5E021C9A2B900FCBCA5 /* hindsight.entitlements */,
 				489984842192258400ADE46E /* DetailsFlow */,
 				489984832192257800ADE46E /* CreateFlow */,
 				489984772190B34400ADE46E /* ConnectFlow */,
@@ -488,6 +490,11 @@
 				TargetAttributes = {
 					13BA21D8217278F900064C03 = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					13BA21EC217278FA00064C03 = {
 						CreatedOnToolsVersion = 10.0;
@@ -917,6 +924,7 @@
 			baseConfigurationReference = 2342B22C4914164D0E9CAFDB /* Pods-hindsight.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = hindsight/hindsight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 289Y28S3G3;
 				INFOPLIST_FILE = hindsight/Info.plist;
@@ -936,6 +944,7 @@
 			baseConfigurationReference = D7AB948399AB4587E52B8D53 /* Pods-hindsight.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = hindsight/hindsight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 289Y28S3G3;
 				INFOPLIST_FILE = hindsight/Info.plist;
