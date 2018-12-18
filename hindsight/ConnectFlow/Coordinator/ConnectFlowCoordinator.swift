@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Swinject
+import FBSDKLoginKit
 
 protocol ConnectFlowCoordinatorProtocol {
     func presentLogInAsRoot(nc: UINavigationController)
@@ -36,9 +37,27 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
     func presentLogInAsRoot(nc: UINavigationController) {
         let vm = LoginViewModel(facebookConnectClosure: {
 			self.client.connect()
+            //self.facebookLoginTest()
 		})
         let vc = LoginViewController(viewModel: vm)
         navigationController.isNavigationBarHidden = true
         presenter.makeRoot(vc: vc, nc: navigationController)
+    }
+
+    private func facebookLoginTest() {
+        let loginManager = FBSDKLoginManager()
+        loginManager.logIn(withReadPermissions: ["public_profile", "user_friends", "email"], from: navigationController) { loginResult, error in
+            /*
+            switch loginResult {
+            case .Failed(let error):
+                print(error)
+            case .Cancelled:
+                print("User cancelled login.")
+            case .Success(let grantedPermissions, let declinedPermissions, let accessToken):
+                print("Logged in!")
+            }
+            */
+            print(loginResult, error)
+        }
     }
 }

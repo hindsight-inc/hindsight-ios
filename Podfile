@@ -24,6 +24,7 @@ target 'hindsight' do
   pod 'SnapKit'
   pod 'SwiftLint'
   pod 'RealmSwift'
+  pod 'FBSDKLoginKit'
   
    target 'hindsightTests' do
     inherit!  :search_paths
