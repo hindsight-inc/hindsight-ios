@@ -36,7 +36,7 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 
     func presentLogInAsRoot(nc: UINavigationController) {
         let vm = LoginViewModel(facebookConnectClosure: {
-            self.facebookLoginTest()
+            self.facebookConnect()
 		})
         let vc = LoginViewController(viewModel: vm)
         navigationController.isNavigationBarHidden = true
@@ -44,24 +44,30 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
     }
 
     private let loginManager = FBSDKLoginManager()
-    private func facebookLoginTest() {
+    private func facebookConnect() {
+
+        if let token = FBSDKAccessToken.current() {
+            print("FB token exists", token.tokenString)
+            self.client.connect(token: token.tokenString)
+            return
+        }
 
         loginManager.logIn(withReadPermissions: ["public_profile", "user_friends", "email"],
             from: navigationController) { loginResult, error in
 
             if let error = error {
-                print(error)
+                print("FB failed", error)
                 return
             }
             guard let result = loginResult else {
-                print("invalid result")
+                print("FB invalid result")
                 return
             }
             guard let token = result.token else {
-                print("invalid token")
+                print("FB invalid token")
                 return
             }
-            print(result, token)
+            print("FB token obtained", token.tokenString)
             self.client.connect(token: token.tokenString)
         }
     }
