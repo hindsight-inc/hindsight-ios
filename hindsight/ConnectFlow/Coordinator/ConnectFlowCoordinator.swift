@@ -20,8 +20,6 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
     internal let presenter: Presenting
 
     private let container: Container
-	// who owns API client?
-	private let client: ConnectApiClientProtocol
 
     private let navigationController: UINavigationController
 
@@ -31,20 +29,32 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
         self.navigationController = nc
         DependencyConfigurator.registerConnectFlowDependencies(container: container)
 
-		client = container.resolveUnwrapped(ConnectApiClientProtocol.self)
     }
 
     func presentLogInAsRoot(nc: UINavigationController) {
         let vm = LoginViewModel(facebookConnectClosure: {
-            self.facebookConnect()
+            Connector(container: self.container, vc: self.navigationController).facebookConnect()
 		})
         let vc = LoginViewController(viewModel: vm)
         navigationController.isNavigationBarHidden = true
         presenter.makeRoot(vc: vc, nc: navigationController)
     }
+}
 
+struct Connector {
+
+    private let container: Container
+    private var viewController: UIViewController
+    private let client: ConnectApiClientProtocol
     private let loginManager = FBSDKLoginManager()
-    private func facebookConnect() {
+
+    init(container: Container, vc: UIViewController) {
+        self.container = container
+        self.viewController = vc
+        self.client = container.resolveUnwrapped(ConnectApiClientProtocol.self)
+    }
+
+    func facebookConnect() {
 
         if let token = FBSDKAccessToken.current() {
             print("FB token exists", token.tokenString)
@@ -53,7 +63,7 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
         }
 
         loginManager.logIn(withReadPermissions: ["public_profile", "user_friends", "email"],
-            from: navigationController) { loginResult, error in
+            from: viewController) { loginResult, error in
 
             if let error = error {
                 print("FB failed", error)
