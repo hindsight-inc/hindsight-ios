@@ -34,6 +34,10 @@ internal enum Constants {
             internal static let username = Constants.tr("Localizable", "Non_UI.network.auth.login.param.username")
           }
         }
+        internal enum Ping {
+          /// /ping
+          internal static let api = Constants.tr("Localizable", "Non_UI.network.auth.ping.api")
+        }
         internal enum Refresh {
           /// /token/refresh
           internal static let api = Constants.tr("Localizable", "Non_UI.network.auth.refresh.api")

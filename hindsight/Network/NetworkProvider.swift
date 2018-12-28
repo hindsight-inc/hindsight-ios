@@ -120,7 +120,8 @@ struct NetworkProvider: NetworkProviderProtocol {
     /// - Parameter user: user credentials
     /// - Returns: Single<Result<Bool>>
     func register(user: UserCredentialsProtocol) -> Single<NetworkResult> {
-        return webServiceRequest(method: AuthEndpoint.register(userName: user.userName, password: user.password))
+        //return webServiceRequest(method: AuthEndpoint.register(userName: user.userName, password: user.password))
+        return Variable(Result.error(.NotImplemented)).asObservable().asSingle()
     }
 
     /// Login User

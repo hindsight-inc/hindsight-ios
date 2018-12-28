@@ -11,6 +11,8 @@
 "Non_UI.network.auth.register.param.password" = "password";
 "Non_UI.network.user.login.sample_Response" = "register";
 
+"Non_UI.network.auth.ping.api" = "/ping";
+
 "Non_UI.network.auth.login.api" = "/user/login";
 "Non_UI.network.auth.login.param.username" = "username";
 "Non_UI.network.auth.login.param.password" = "password";

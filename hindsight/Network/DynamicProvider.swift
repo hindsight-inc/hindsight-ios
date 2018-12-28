@@ -69,8 +69,15 @@ class DynamicProvider: MoyaProvider<DynamicTarget> {
 /// we are just routing the calls to actual target type
 extension Reactive where Base: DynamicProvider {
     func request(_ token: TargetType, callbackQueue: DispatchQueue? = nil) -> Single<Response> {
-        let dynamicTarget = DynamicTarget(baseURL: base.baseURL, target: token)
-        let provider = MoyaProvider<DynamicTarget>()
+//        let p = MoyaProvider<AuthEndpoint>(plugins: [NetworkLoggerPlugin(verbose: true)])
+//        return p.rx.request(.refresh)
+
+//
+        let dynamicTarget = DynamicTarget(baseURL: base.baseURL, target: AuthEndpoint.ping)
+        let provider = MoyaProvider<DynamicTarget>(plugins: [NetworkLoggerPlugin(verbose: true)])
+//        provider.request(dynamicTarget) { res in
+//            print(res)
+//        }
         return provider.rx.request(dynamicTarget, callbackQueue: callbackQueue)
     }
 

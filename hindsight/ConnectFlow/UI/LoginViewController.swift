@@ -30,22 +30,23 @@ class LoginViewController: UIViewController {
         return view
     }()
 
-    lazy var facebookConnect: LoginButton = {
+    lazy var facebookConnect: UIButton = {
 
-        let normalState = LoginButtonState(text: Constants.Button.Text.facebookLogin,
-                                           textColor: ColorName.hindsightWhite.color,
-                                           backgroundColor: ColorName.facebookButtonStateNormal.color,
-                                           image: Asset.facebookLogo.image)
-        let highlightState = LoginButtonState(text: Constants.Button.Text.facebookLogin,
-                                              textColor: ColorName.hindsightWhite.color,
-                                              backgroundColor: ColorName.facebookButtonStateHighlight.color,
-                                              image: Asset.facebookLogo.image)
-        let buttonViewModel = LoginButtonViewModel(normalState: normalState,
-                                                   highlightState: highlightState,
-                                                   didSelectClosure: { [unowned self] in
-            self.viewModel.connectFacebook()
-        })
-        let button = LoginButton(viewModel: buttonViewModel)
+//        let normalState = LoginButtonState(text: Constants.Button.Text.facebookLogin,
+//                                           textColor: ColorName.hindsightWhite.color,
+//                                           backgroundColor: ColorName.facebookButtonStateNormal.color,
+//                                           image: Asset.facebookLogo.image)
+//        let highlightState = LoginButtonState(text: Constants.Button.Text.facebookLogin,
+//                                              textColor: ColorName.hindsightWhite.color,
+//                                              backgroundColor: ColorName.facebookButtonStateHighlight.color,
+//                                              image: Asset.facebookLogo.image)
+//        let buttonViewModel = LoginButtonViewModel(normalState: normalState,
+//                                                   highlightState: highlightState,
+//                                                   didSelectClosure: { [unowned self] in
+//            self.viewModel.connectFacebook()
+//        })
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
+           // LoginButton(viewModel: buttonViewModel)
         return button
     }()
 
