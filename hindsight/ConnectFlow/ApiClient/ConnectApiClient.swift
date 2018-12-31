@@ -7,15 +7,17 @@
 //
 
 import Foundation
+import RxSwift
+
 protocol ConnectApiClientProtocol {
-	func connect(token: String)
+    func connect(token: String) -> Single<NetworkResult>
 }
 
 struct ConnectApiClient: ConnectApiClientProtocol {
 
     let networkProvider: NetworkProviderProtocol
 
-    func connect(token: String) {
-		_ = networkProvider.connectFacebook(token: token)
+    func connect(token: String) -> Single<NetworkResult> {
+		return networkProvider.connectFacebook(token: token)
 	}
 }

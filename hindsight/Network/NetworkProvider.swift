@@ -54,6 +54,14 @@ enum HindsightError: Error {
 
     /// NotImplemented- method not impleted
     case NotImplemented
+
+    /// An Enum type to abstract all connect errors
+    enum ConnectError {
+
+    }
+
+    /// - connectError: unable to connect to something like FB Login SDK
+    case connectError(error: ConnectError)
 }
 
 enum SourceBehaviour {

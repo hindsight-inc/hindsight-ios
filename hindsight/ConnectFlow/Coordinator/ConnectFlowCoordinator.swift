@@ -28,20 +28,26 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
         self.presenter = presenter
         self.container = container
         self.navigationController = nc
-        //  TODO: @manish why static func here?
+        //  TODO: @manish why static func here instead of transient object?
         DependencyConfigurator.registerConnectFlowDependencies(container: container)
     }
 
+    private let bag = DisposeBag()
     //  TODO: @manish remove nc?
     func presentLogInAsRoot(nc: UINavigationController) {
         let vm = LoginViewModel(facebookConnectClosure: {
-            let bag = DisposeBag()
-            let subscription = Connector(container: self.container, vc: self.navigationController)
+            let client = self.container.resolveUnwrapped(ConnectApiClientProtocol.self)
+            Connector(client: client, vc: self.navigationController)
                 .facebookConnect()
-                .subscribe { event in
-                    print("FB event: \(event)")
-                }
-            subscription.disposed(by: bag)
+                .subscribe(
+                    onSuccess: { result in
+                        print("ON success \(result)")
+                    },
+                    onError: { error in
+                        print("ON error \(error)")
+                    }
+                )
+                .disposed(by: self.bag)
         })
         let vc = LoginViewController(viewModel: vm)
         navigationController.isNavigationBarHidden = true
@@ -51,56 +57,68 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 
 import RxSwift
 
+struct ConnectModel {
+    var code: Int?
+    var expire: Date?
+    var token: String?
+}
+
 struct Connector {
 
-    private let container: Container
     private var viewController: UIViewController
     private let client: ConnectApiClientProtocol
     private let loginManager = FBSDKLoginManager()
+    private let bag = DisposeBag()
 
-    init(container: Container, vc: UIViewController) {
-        self.container = container
+    init(client: ConnectApiClientProtocol, vc: UIViewController) {
+        self.client = client
         self.viewController = vc
-        self.client = container.resolveUnwrapped(ConnectApiClientProtocol.self)
+
+        //FBSDKSettings.enableLoggingBehavior(.none)
+        //FBSDKSettings.loggingBehaviors.removeAll()
         loginManager.logOut()
     }
 
-    func facebookConnect() -> Observable<Bool> {
-        return Observable<Bool>.create { observer -> Disposable in
+    func facebookConnect() -> Single<ConnectModel> {
+        return Single<ConnectModel>.create { single in
             if let token = FBSDKAccessToken.current() {
                 print("FB token exists", token.tokenString)
-                self.client.connect(token: token.tokenString)
-                observer.onNext(false)
-                observer.onCompleted()
+                self.hindsightConnect(token: token, single: single)
                 return Disposables.create()
             }
 
+            // TODO: find where FBSDK define these permissions
             self.loginManager.logIn(withReadPermissions: ["public_profile", "user_friends", "email"], from: self.viewController) { loginResult, error in
 
                 if let error = error {
-                    observer.onNext(false)
-                    observer.onCompleted()
+                    single(.error(error))
                     print("FB failed", error)
                     return
                 }
                 guard let result = loginResult else {
-                    observer.onNext(false)
-                    observer.onCompleted()
-                    print("FB invalid result")
+                    single(.error(NSError(domain: "FB invalid login result", code: -1)))
                     return
                 }
                 guard let token = result.token else {
-                    observer.onNext(false)
-                    observer.onCompleted()
-                    print("FB invalid token")
+                    single(.error(NSError(domain: "FB invalid login token", code: -1)))
                     return
                 }
                 print("FB token obtained", token.tokenString)
-                self.client.connect(token: token.tokenString)
-                observer.onNext(true)
-                observer.onCompleted()
+                self.hindsightConnect(token: token, single: single)
             }
             return Disposables.create()
         }
+    }
+
+    func hindsightConnect(token: FBSDKAccessToken, single: @escaping (SingleEvent<ConnectModel>) -> Void) {
+        client.connect(token: token.tokenString)
+            .subscribe(
+                onSuccess: { result in
+                    print("ON success \(result)")
+            },
+                onError: { error in
+                    single(.error(NSError(domain: "HINDSIGHT facebook connect failed", code: -1)))
+            })
+            .disposed(by: self.bag)
     }
 }
