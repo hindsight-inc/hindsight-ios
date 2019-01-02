@@ -53,6 +53,19 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
         navigationController.isNavigationBarHidden = true
         presenter.makeRoot(vc: vc, nc: navigationController)
     }
+
+	private func connectSuccess(token: String) {
+		// TokenManager().setToken(token)
+		// presenter.push
+		// TODO: how to get next vc?
+		let vc = UIViewController()
+		presenter.push(vc: vc, onto: navigationController, animated: true)
+	}
+
+	private func connectFailure(error: Error) {
+        let errorPresenter = container.resolveUnwrapped(ErrorPresentingProtocol.self)
+		errorPresenter.show(error: error)
+	}
 }
 
 import RxSwift
