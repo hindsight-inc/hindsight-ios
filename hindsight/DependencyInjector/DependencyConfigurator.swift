@@ -25,8 +25,11 @@ struct DependencyConfigurator {
     /// - Parameter container: a swinject container
     static func registerConnectFlowDependencies(container: Container) {
         let nwProvider = container.resolveUnwrapped(NetworkProviderProtocol.self)
-        container.register(ConnectApiClientProtocol.self) { _ in
-            ConnectApiClient(networkProvider: nwProvider)
+		container.register(ConnectApiClientProtocol.self) { _ in
+			ConnectApiClient(networkProvider: nwProvider)
+		}
+        container.register(ErrorPresentingProtocol.self) { _, viewController in
+			AlertErrorPresenter(viewController: viewController)
         }
     }
 
