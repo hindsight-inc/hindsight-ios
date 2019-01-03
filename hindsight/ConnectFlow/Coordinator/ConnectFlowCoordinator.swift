@@ -37,14 +37,29 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
     func presentLogInAsRoot(nc: UINavigationController) {
         let vm = LoginViewModel(facebookConnectClosure: {
             let client = self.container.resolveUnwrapped(ConnectApiClientProtocol.self)
+
+			/*
+			client.connect(token: "")
+				.subscribe(
+					onSuccess: { result in
+						print("ON success \(result)")
+				},
+					onError: { error in
+						print("ON error \(error)")
+				})
+				.disposed(by: self.bag)
+            */
+			//Connector(client: client, vc: self.navigationController).test(token: "")
             Connector(client: client, vc: self.navigationController)
                 .facebookConnect()
                 .subscribe(
                     onSuccess: { result in
                         print("ON success \(result)")
+						self.connectSuccess(token: "")
                     },
                     onError: { error in
                         print("ON error \(error)")
+						self.connectFailure(error: error)
                     }
                 )
                 .disposed(by: self.bag)
@@ -56,14 +71,16 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 
 	private func connectSuccess(token: String) {
 		// TokenManager().setToken(token)
-		// presenter.push
 		// TODO: how to get next vc?
 		let vc = UIViewController()
 		presenter.push(vc: vc, onto: navigationController, animated: true)
 	}
 
 	private func connectFailure(error: Error) {
-        let errorPresenter = container.resolveUnwrapped(ErrorPresentingProtocol.self)
+		// TODO: create resolveUnwrapped with arguments
+		//let errorPresenter = container.resolveUnwrapped(ErrorPresentingProtocol.self)
+		let viewController: UIViewController = navigationController
+		let errorPresenter = container.resolve(ErrorPresentingProtocol.self, argument: viewController)!
 		errorPresenter.show(error: error)
 	}
 }
@@ -134,4 +151,16 @@ struct Connector {
             })
             .disposed(by: self.bag)
     }
+
+	func test(token: String) {
+		client.connect(token: token)
+			.subscribe(
+				onSuccess: { result in
+					print("ON success \(result)")
+			},
+				onError: { error in
+					print("ON error \(error)")
+			})
+			.disposed(by: self.bag)
+	}
 }
