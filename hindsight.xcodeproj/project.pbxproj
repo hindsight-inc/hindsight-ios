@@ -43,7 +43,7 @@
 		B39EB40B21DC5DC000C66817 /* ErrorPresenting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB40A21DC5DC000C66817 /* ErrorPresenting.swift */; };
 		B39EB40D21E1B29F00C66817 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB40C21E1B29F00C66817 /* NetworkResponse.swift */; };
 		B39EB40F21E1B33900C66817 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB40E21E1B33900C66817 /* Token.swift */; };
-		B39EB41321E1B7D700C66817 /* Connector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB41221E1B7D700C66817 /* Connector.swift */; };
+		B39EB41321E1B7D700C66817 /* FacebookConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB41221E1B7D700C66817 /* FacebookConnector.swift */; };
 		FDDE27058DC0C1064C682C5F /* Pods_hindsight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28AC9CEAA1029095C1A8EE3D /* Pods_hindsight.framework */; };
 /* End PBXBuildFile section */
 
@@ -110,7 +110,7 @@
 		B39EB40A21DC5DC000C66817 /* ErrorPresenting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenting.swift; sourceTree = "<group>"; };
 		B39EB40C21E1B29F00C66817 /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
 		B39EB40E21E1B33900C66817 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
-		B39EB41221E1B7D700C66817 /* Connector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connector.swift; sourceTree = "<group>"; };
+		B39EB41221E1B7D700C66817 /* FacebookConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookConnector.swift; sourceTree = "<group>"; };
 		D4CAFEF15F10566409793390 /* Pods-hindsightTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hindsightTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hindsightTests/Pods-hindsightTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D7AB948399AB4587E52B8D53 /* Pods-hindsight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hindsight.release.xcconfig"; path = "Pods/Target Support Files/Pods-hindsight/Pods-hindsight.release.xcconfig"; sourceTree = "<group>"; };
 		DB48E6B288FD364AF7DE767C /* Pods_hindsightUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hindsightUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,10 +183,10 @@
 			isa = PBXGroup;
 			children = (
 				FA65B5E021C9A2B900FCBCA5 /* hindsight.entitlements */,
+				489984722190A60C00ADE46E /* DependencyInjector */,
 				489984842192258400ADE46E /* DetailsFlow */,
 				489984832192257800ADE46E /* CreateFlow */,
 				489984772190B34400ADE46E /* ConnectFlow */,
-				489984722190A60C00ADE46E /* DependencyInjector */,
 				4899846F2190A56A00ADE46E /* ApiClient */,
 				4899846A2190A3A700ADE46E /* Coordinators */,
 				AF0E8942219B823C00F06D76 /* UI */,
@@ -417,7 +417,7 @@
 		B39EB41421E1B81100C66817 /* SSO */ = {
 			isa = PBXGroup;
 			children = (
-				B39EB41221E1B7D700C66817 /* Connector.swift */,
+				B39EB41221E1B7D700C66817 /* FacebookConnector.swift */,
 			);
 			path = SSO;
 			sourceTree = "<group>";
@@ -745,7 +745,7 @@
 			files = (
 				484C49EB21766B32005DAD02 /* DynamicProvider.swift in Sources */,
 				484C49FD217682E2005DAD02 /* Topic.swift in Sources */,
-				B39EB41321E1B7D700C66817 /* Connector.swift in Sources */,
+				B39EB41321E1B7D700C66817 /* FacebookConnector.swift in Sources */,
 				489984742190A65200ADE46E /* Container+UnwrappedResolved.swift in Sources */,
 				489984802190DCEF00ADE46E /* LoginViewController.swift in Sources */,
 				134B794121739433009370E7 /* UserEndpoint.swift in Sources */,

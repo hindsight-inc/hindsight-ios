@@ -33,12 +33,13 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 
     private let bag = DisposeBag()
 
-    //  TODO: @Manish remove nc?
+    //  TODO: @Manish remove nc as we are using self.navigationController?
     func presentLogInAsRoot(nc: UINavigationController) {
         let vm = LoginViewModel(facebookConnectClosure: {
             let client = self.container.resolveUnwrapped(ConnectApiClientProtocol.self)
-            Connector(client: client, viewController: self.navigationController)
-				.facebookConnect()
+			let connector = self.container.resolve(SSOConnectorProtocol.self, arguments:
+				client, self.navigationController as UIViewController)! // TODO: @Leo create resolveUnwrapped with arguments
+			connector.connect()
                 .subscribe(
                     onSuccess: { bearer in
                         print("ON success", bearer)
@@ -64,7 +65,7 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 	}
 
 	private func connectFailure(error: Error) {
-		// TODO: @Leo create resolveUnwrapped with arguments
+		// TODO: @Leo create resolveUnwrapped with an argument
 		//let errorPresenter = container.resolveUnwrapped(ErrorPresentingProtocol.self)
 		let viewController: UIViewController = navigationController
 		let errorPresenter = container.resolve(ErrorPresentingProtocol.self, argument: viewController)!

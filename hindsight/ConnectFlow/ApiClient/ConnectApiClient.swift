@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 
+// TODO: @Leo rename to ConnnectAPIClientProtocol etc.?
 protocol ConnectApiClientProtocol {
     func connect(token: String) -> Single<NetworkResult>
 }
@@ -17,6 +18,7 @@ struct ConnectApiClient: ConnectApiClientProtocol {
 
     let networkProvider: NetworkProviderProtocol
 
+	// TODO: @Leo rename to `connectObservable` etc.?
     func connect(token: String) -> Single<NetworkResult> {
 		return networkProvider.connectFacebook(token: token)
 	}

@@ -10,9 +10,14 @@ import RxSwift
 import FacebookCore
 import FacebookLogin
 
+protocol SSOConnectorProtocol {
+	init(client: ConnectApiClientProtocol, viewController: UIViewController)
+	func connect() -> Single<TokenProtocol>
+}
+
 /// SSO connector. For now other than facebook connect,
 /// we don't have anything else in mind, so it's in its simplest form.
-struct Connector {
+struct FacebookConnector: SSOConnectorProtocol {
 
 	private var viewController: UIViewController
 	private let client: ConnectApiClientProtocol
@@ -28,7 +33,7 @@ struct Connector {
 		loginManager.logOut()
 	}
 
-	func facebookConnect() -> Single<TokenProtocol> {
+	func connect() -> Single<TokenProtocol> {
 		return Single<TokenProtocol>.create { single in
 			if let token = AccessToken.current {
 				print("FB token exists", token.authenticationToken)
@@ -55,7 +60,7 @@ struct Connector {
 		}
 	}
 
-	func hindsightConnect(token: AccessToken, single: @escaping (SingleEvent<TokenProtocol>) -> Void) {
+	private func hindsightConnect(token: AccessToken, single: @escaping (SingleEvent<TokenProtocol>) -> Void) {
 		client.connect(token: token.authenticationToken)
 			.subscribe(onSuccess: { result in
 				switch result {

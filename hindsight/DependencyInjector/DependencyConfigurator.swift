@@ -26,13 +26,19 @@ struct DependencyConfigurator {
     ///
     /// - Parameter container: a swinject container
     static func registerConnectFlowDependencies(container: Container) {
-        let nwProvider = container.resolveUnwrapped(NetworkProviderProtocol.self)
+		/// Resolving top level dependencies
+        let networkProvider = container.resolveUnwrapped(NetworkProviderProtocol.self)
+
+		/// Registering coordinator level dependencies
 		container.register(ConnectApiClientProtocol.self) { _ in
-			ConnectApiClient(networkProvider: nwProvider)
+			ConnectApiClient(networkProvider: networkProvider)
 		}
-        container.register(ErrorPresentingProtocol.self) { _, viewController in
+		container.register(ErrorPresentingProtocol.self) { _, viewController in
 			AlertErrorPresenter(viewController: viewController)
-        }
+		}
+		container.register(SSOConnectorProtocol.self) { _, client, viewController in
+			FacebookConnector(client: client, viewController: viewController)
+		}
     }
 
     /// Register dependencies for Detail flow
