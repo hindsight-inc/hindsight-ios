@@ -37,8 +37,8 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
     func presentLogInAsRoot(nc: UINavigationController) {
         let vm = LoginViewModel(facebookConnectClosure: {
             let client = self.container.resolveUnwrapped(ConnectApiClientProtocol.self)
-			let connector = self.container.resolve(SSOConnectorProtocol.self, arguments:
-				client, self.navigationController as UIViewController)! // TODO: @Leo create resolveUnwrapped with arguments
+			let connector = self.container.resolveUnwrapped(SSOConnectorProtocol.self, arguments:
+				client, self.navigationController as UIViewController)
 			connector.connect()
                 .subscribe(
                     onSuccess: { bearer in
@@ -65,10 +65,8 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 	}
 
 	private func connectFailure(error: Error) {
-		// TODO: @Leo create resolveUnwrapped with an argument
-		//let errorPresenter = container.resolveUnwrapped(ErrorPresentingProtocol.self)
 		let viewController: UIViewController = navigationController
-		let errorPresenter = container.resolve(ErrorPresentingProtocol.self, argument: viewController)!
+		let errorPresenter = container.resolveUnwrapped(ErrorPresentingProtocol.self, argument: viewController)
 		errorPresenter.show(error: error)
 	}
 }
