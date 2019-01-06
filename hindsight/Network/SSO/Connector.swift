@@ -78,7 +78,7 @@ struct Connector {
 			}, onError: { error in
 				single(.error(error))
 			})
-			//.disposed(by: self.bag)	// TODO: how to hold `bag` here?
+			//.disposed(by: self.bag)	// TODO: @Leo how to hold `bag` here?
 			.disposed(by: globalBag)
 	}
 }

@@ -15,6 +15,6 @@ import Foundation
 /// Response for `/user/connect`
 struct ConnectResponse: Decodable {
 	var code: Int?
-	var expire: String?		// TODO: map to data
+	var expire: String?		// Example: "2030-06-03T15:53:50-04:00"
 	var token: String?
 }

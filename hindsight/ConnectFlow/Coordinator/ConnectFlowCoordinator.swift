@@ -27,13 +27,13 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
         self.presenter = presenter
         self.container = container
         self.navigationController = nc
-        //  TODO: @manish why static func here instead of transient object?
+        //  TODO: @Manish why static func here instead of transient object?
         DependencyConfigurator.registerConnectFlowDependencies(container: container)
     }
 
     private let bag = DisposeBag()
 
-    //  TODO: @manish remove nc?
+    //  TODO: @Manish remove nc?
     func presentLogInAsRoot(nc: UINavigationController) {
         let vm = LoginViewModel(facebookConnectClosure: {
             let client = self.container.resolveUnwrapped(ConnectApiClientProtocol.self)
@@ -58,13 +58,13 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 
 	private func connectSuccess(token: String) {
 		// TokenManager().setToken(token)
-		// TODO: how to get next vc?
+		// TODO: @Leo how to get next vc?
 		let vc = UIViewController()
 		presenter.push(vc: vc, onto: navigationController, animated: true)
 	}
 
 	private func connectFailure(error: Error) {
-		// TODO: create resolveUnwrapped with arguments
+		// TODO: @Leo create resolveUnwrapped with arguments
 		//let errorPresenter = container.resolveUnwrapped(ErrorPresentingProtocol.self)
 		let viewController: UIViewController = navigationController
 		let errorPresenter = container.resolve(ErrorPresentingProtocol.self, argument: viewController)!
