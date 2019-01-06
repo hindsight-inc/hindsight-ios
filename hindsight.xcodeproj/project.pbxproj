@@ -41,6 +41,8 @@
 		55A4589F219BB04100C5A042 /* LoginButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4589E219BB04100C5A042 /* LoginButtonViewModel.swift */; };
 		A5033A0392DCFBB5DC729979 /* Pods_hindsightUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB48E6B288FD364AF7DE767C /* Pods_hindsightUITests.framework */; };
 		B39EB40B21DC5DC000C66817 /* ErrorPresenting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB40A21DC5DC000C66817 /* ErrorPresenting.swift */; };
+		B39EB40D21E1B29F00C66817 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB40C21E1B29F00C66817 /* NetworkResponse.swift */; };
+		B39EB40F21E1B33900C66817 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB40E21E1B33900C66817 /* Token.swift */; };
 		FDDE27058DC0C1064C682C5F /* Pods_hindsight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28AC9CEAA1029095C1A8EE3D /* Pods_hindsight.framework */; };
 /* End PBXBuildFile section */
 
@@ -105,6 +107,8 @@
 		55A4589E219BB04100C5A042 /* LoginButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButtonViewModel.swift; sourceTree = "<group>"; };
 		AE6BA4D2A383FB28A637BCD4 /* Pods_hindsightTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hindsightTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B39EB40A21DC5DC000C66817 /* ErrorPresenting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenting.swift; sourceTree = "<group>"; };
+		B39EB40C21E1B29F00C66817 /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
+		B39EB40E21E1B33900C66817 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		D4CAFEF15F10566409793390 /* Pods-hindsightTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hindsightTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hindsightTests/Pods-hindsightTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D7AB948399AB4587E52B8D53 /* Pods-hindsight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hindsight.release.xcconfig"; path = "Pods/Target Support Files/Pods-hindsight/Pods-hindsight.release.xcconfig"; sourceTree = "<group>"; };
 		DB48E6B288FD364AF7DE767C /* Pods_hindsightUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hindsightUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -237,6 +241,8 @@
 			children = (
 				484C49FA217682D2005DAD02 /* User.swift */,
 				484C49FC217682E2005DAD02 /* Topic.swift */,
+				B39EB40E21E1B33900C66817 /* Token.swift */,
+				B39EB40C21E1B29F00C66817 /* NetworkResponse.swift */,
 				484C4A002177B7C1005DAD02 /* UserCredentialsProtocol.swift */,
 			);
 			path = Model;
@@ -743,10 +749,12 @@
 				489984822191EDF000ADE46E /* LoginViewModel.swift in Sources */,
 				B39EB40B21DC5DC000C66817 /* ErrorPresenting.swift in Sources */,
 				55A4589D219BB01600C5A042 /* LoginButtonState.swift in Sources */,
+				B39EB40F21E1B33900C66817 /* Token.swift in Sources */,
 				13BA21DD217278F900064C03 /* AppDelegate.swift in Sources */,
 				489984712190A5D400ADE46E /* ApiClient.swift in Sources */,
 				48998493219B6FA100ADE46E /* Strings.swift in Sources */,
 				55A4589F219BB04100C5A042 /* LoginButtonViewModel.swift in Sources */,
+				B39EB40D21E1B29F00C66817 /* NetworkResponse.swift in Sources */,
 				4899847D2190B40E00ADE46E /* ConnectFlowCoordinator.swift in Sources */,
 				489984762190A74200ADE46E /* DependencyConfigurator.swift in Sources */,
 				4899846C2190A3CB00ADE46E /* BaseFlowCoordinator.swift in Sources */,

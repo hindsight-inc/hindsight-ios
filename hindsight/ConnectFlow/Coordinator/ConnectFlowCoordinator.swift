@@ -41,9 +41,9 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
             Connector(client: client, vc: self.navigationController)
 				.facebookConnect()
                 .subscribe(
-                    onSuccess: { model in
-                        print("ON success", model)
-						self.connectSuccess(token: model.token ?? "")
+                    onSuccess: { bearer in
+                        print("ON success", bearer)
+						self.connectSuccess(token: bearer.token ?? "")
                     },
                     onError: { error in
                         print("ON error \(error)")
@@ -75,12 +75,6 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 
 import RxSwift
 
-struct ConnectModel: Decodable {
-    var code: Int?
-	var expire: String?		// TODO: map to data
-    var token: String?
-}
-
 struct Connector {
 
     private var viewController: UIViewController
@@ -97,8 +91,8 @@ struct Connector {
         loginManager.logOut()
     }
 
-    func facebookConnect() -> Single<ConnectModel> {
-        return Single<ConnectModel>.create { single in
+    func facebookConnect() -> Single<TokenProtocol> {
+        return Single<TokenProtocol>.create { single in
             if let token = FBSDKAccessToken.current() {
                 print("FB token exists", token.tokenString)
                 self.hindsightConnect(token: token, single: single)
@@ -129,7 +123,7 @@ struct Connector {
         }
     }
 
-    func hindsightConnect(token: FBSDKAccessToken, single: @escaping (SingleEvent<ConnectModel>) -> Void) {
+    func hindsightConnect(token: FBSDKAccessToken, single: @escaping (SingleEvent<TokenProtocol>) -> Void) {
         client.connect(token: token.tokenString)
 			.subscribe(onSuccess: { result in
 				switch result {
@@ -141,8 +135,8 @@ struct Connector {
 					//let str = String(data: data, encoding: .utf8)
 					//print("ON success", str ?? "nil")
 					do {
-						let model = try JSONDecoder().decode(ConnectModel.self, from: data)
-						single(.success(model))
+						let token = try JSONDecoder().decode(ConnectResponse.self, from: data)
+						single(.success(token))
 					} catch let error {
 						single(.error(error))
 					}
