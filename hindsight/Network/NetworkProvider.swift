@@ -225,6 +225,7 @@ extension NetworkProvider {
     }
 }
 
+/// A Moya provider without RX
 struct MoyaNetworkProvider: NetworkProviderProtocol {
 
 	func register(user: UserCredentialsProtocol) -> Single<NetworkResult> {
@@ -248,24 +249,22 @@ struct MoyaNetworkProvider: NetworkProviderProtocol {
 	/// - Parameter token: access token
 	/// - Returns: Single<Result<Bool>>
 	func connectFacebook(token: String) -> Single<NetworkResult> {
-		return Single<NetworkResult>.create { _ in
-			print("Connecting to facebook", token)
+		return Single<NetworkResult>.create { single in
 			let provider = MoyaProvider<ConnectEndpoint>(plugins: [NetworkLoggerPlugin(verbose: true)])
 			//let provider = MoyaProvider<ConnectEndpoint>()
 			provider.request(.connect(accessToken: token)) { result in
-    			print("Facebook result", result)
 				switch result {
 				case let .success(response):
 					let code = response.statusCode
 					let data = response.data
-					print("DEBUG response", String(data: data, encoding: .utf8) ?? "nil")
-					guard code == 200 else {
-    					print("Facebook failure", code, data)
-						return
+					if code == 200 {
+						single(.success(NetworkResult.success(data)))
+					} else {
+						let wsError = HindsightError.WebServiceError(code: code, message: response.description, resolve: response.debugDescription)
+						single(.error(HindsightError.webServiceError(wsError: wsError)))
 					}
-					print("Facebook response", data)
 				case let .failure(error):
-					print("Facebook failure", error)
+                    single(.error(error))
 				}
 			}
 			return Disposables.create()

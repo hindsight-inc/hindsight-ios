@@ -33,29 +33,17 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
     }
 
     private let bag = DisposeBag()
+
     //  TODO: @manish remove nc?
     func presentLogInAsRoot(nc: UINavigationController) {
         let vm = LoginViewModel(facebookConnectClosure: {
             let client = self.container.resolveUnwrapped(ConnectApiClientProtocol.self)
-
-			/*
-			client.connect(token: "")
-				.subscribe(
-					onSuccess: { result in
-						print("ON success \(result)")
-				},
-					onError: { error in
-						print("ON error \(error)")
-				})
-				.disposed(by: self.bag)
-            */
-			//Connector(client: client, vc: self.navigationController).test(token: "")
             Connector(client: client, vc: self.navigationController)
-                .facebookConnect()
+				.facebookConnect()
                 .subscribe(
-                    onSuccess: { result in
-                        print("ON success \(result)")
-						self.connectSuccess(token: "")
+                    onSuccess: { model in
+                        print("ON success", model)
+						self.connectSuccess(token: model.token ?? "")
                     },
                     onError: { error in
                         print("ON error \(error)")
@@ -87,9 +75,9 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 
 import RxSwift
 
-struct ConnectModel {
+struct ConnectModel: Decodable {
     var code: Int?
-    var expire: Date?
+	var expire: String?		// TODO: map to data
     var token: String?
 }
 
@@ -143,25 +131,30 @@ struct Connector {
 
     func hindsightConnect(token: FBSDKAccessToken, single: @escaping (SingleEvent<ConnectModel>) -> Void) {
         client.connect(token: token.tokenString)
-            .subscribe(
-                onSuccess: { result in
-                    print("ON success \(result)")
-            },
-                onError: { error in
-                    single(.error(NSError(domain: "HINDSIGHT facebook connect failed", code: -1)))
-            })
-            .disposed(by: self.bag)
-    }
-
-	func test(token: String) {
-		client.connect(token: token)
-			.subscribe(
-				onSuccess: { result in
-					print("ON success \(result)")
-			},
-				onError: { error in
-					print("ON error \(error)")
+			.subscribe(onSuccess: { result in
+				switch result {
+				case .success(let data):
+					guard let data = data as? Data else {
+                        single(.error(NSError(domain: "FB invalid response data", code: -1)))
+						return
+					}
+					//let str = String(data: data, encoding: .utf8)
+					//print("ON success", str ?? "nil")
+					do {
+						let model = try JSONDecoder().decode(ConnectModel.self, from: data)
+						single(.success(model))
+					} catch let error {
+						single(.error(error))
+					}
+				case .error(let error):
+    				single(.error(error))
+				}
+			}, onError: { error in
+				single(.error(error))
 			})
-			.disposed(by: self.bag)
-	}
+			//.disposed(by: self.bag)	// TODO: how to hold `bag` here?
+            .disposed(by: globalBag)
+    }
 }
+
+var globalBag = DisposeBag()

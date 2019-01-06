@@ -30,7 +30,7 @@ class LoginViewController: UIViewController {
         return view
     }()
 
-    lazy var facebookConnect: LoginButton = {
+    lazy var facebookConnectButton: LoginButton = {
 
         let normalState = LoginButtonState(text: Constants.Button.Text.facebookLogin,
                                            textColor: ColorName.hindsightWhite.color,
@@ -67,7 +67,7 @@ class LoginViewController: UIViewController {
     func setupUI() {
         view.addSubview(backgroundImageView)
         view.addSubview(logoImageView)
-        view.addSubview(facebookConnect)
+        view.addSubview(facebookConnectButton)
         logoImageView.image = Asset.hindsightLogo.image
         backgroundImageView.image = Asset.hindsightLoginBackground.image
         backgroundImageView.contentMode = .scaleAspectFill
@@ -88,7 +88,7 @@ class LoginViewController: UIViewController {
             make.centerX.equalTo(view.snp.centerX)
             make.top.equalTo(view.snp.top).offset(topMargin)
         }
-        facebookConnect.snp.makeConstraints { make in
+        facebookConnectButton.snp.makeConstraints { make in
             make.leading.equalTo(view.snp.leading).offset(leftRightMargin)
             make.trailing.equalTo(view.snp.trailing).offset(-leftRightMargin)
             make.bottom.equalTo(view.snp.bottom).offset(-bottomMargin)
