@@ -117,8 +117,10 @@ extension ConnectEndpoint: TargetType {
 	var task: Task {
 		switch self {
 		case .connect(let token):
-			let param = [Constants.NonUI.Network.Auth.Connect.Param.method: Constants.NonUI.Network.Auth.Connect.Param.Methods.facebook,
-						 Constants.NonUI.Network.Auth.Connect.Param.accessToken: token]
+			let param = [
+				Constants.NonUI.Network.Auth.Connect.Param.method: Constants.NonUI.Network.Auth.Connect.Param.Methods.facebook,
+				Constants.NonUI.Network.Auth.Connect.Param.accessToken: token
+			]
 			return .requestParameters(parameters:param, encoding: JSONEncoding.default)
 		}
 	}

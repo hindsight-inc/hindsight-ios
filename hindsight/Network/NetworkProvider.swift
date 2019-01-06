@@ -260,7 +260,8 @@ struct MoyaNetworkProvider: NetworkProviderProtocol {
 					if code == 200 {
 						single(.success(NetworkResult.success(data)))
 					} else {
-						let wsError = HindsightError.WebServiceError(code: code, message: response.description, resolve: response.debugDescription)
+						let wsError = HindsightError.WebServiceError(
+							code: code, message: response.description, resolve: response.debugDescription)
 						single(.error(HindsightError.webServiceError(wsError: wsError)))
 					}
 				case let .failure(error):

@@ -7,7 +7,7 @@
 //
 
 import RxSwift
-import FBSDKLoginKit
+import FacebookCore
 import FacebookLogin
 
 /// SSO connector. For now other than facebook connect,
@@ -16,7 +16,7 @@ struct Connector {
 
 	private var viewController: UIViewController
 	private let client: ConnectApiClientProtocol
-	private let loginManager = FBSDKLoginManager()
+	private let loginManager = LoginManager()
 	private let bag = DisposeBag()
 
 	init(client: ConnectApiClientProtocol, viewController: UIViewController) {
@@ -30,38 +30,33 @@ struct Connector {
 
 	func facebookConnect() -> Single<TokenProtocol> {
 		return Single<TokenProtocol>.create { single in
-			if let token = FBSDKAccessToken.current() {
-				print("FB token exists", token.tokenString)
+			if let token = AccessToken.current {
+				print("FB token exists", token.authenticationToken)
 				self.hindsightConnect(token: token, single: single)
 				return Disposables.create()
 			}
 
-			// TODO: find where FBSDK define these permissions
-			let permissions = ["public_profile", "user_friends", "email"]
-			self.loginManager.logIn(withReadPermissions: permissions, from: self.viewController) { loginResult, error in
-
-				if let error = error {
+			let permissions: [ReadPermission] = [
+				.publicProfile,
+				.userFriends,
+				.email
+			]
+			self.loginManager.logIn(readPermissions: permissions, viewController: self.viewController) { result in
+				switch result {
+				case .success(_, _, let token):
+    				self.hindsightConnect(token: token, single: single)
+				case .failed(let error):
 					single(.error(error))
-					print("FB failed", error)
-					return
+				case .cancelled:
+					single(.error(NSError(domain: "FB connect cancelled", code: -1)))
 				}
-				guard let result = loginResult else {
-					single(.error(NSError(domain: "FB invalid login result", code: -1)))
-					return
-				}
-				guard let token = result.token else {
-					single(.error(NSError(domain: "FB invalid login token", code: -1)))
-					return
-				}
-				print("FB token obtained", token.tokenString)
-				self.hindsightConnect(token: token, single: single)
 			}
 			return Disposables.create()
 		}
 	}
 
-	func hindsightConnect(token: FBSDKAccessToken, single: @escaping (SingleEvent<TokenProtocol>) -> Void) {
-		client.connect(token: token.tokenString)
+	func hindsightConnect(token: AccessToken, single: @escaping (SingleEvent<TokenProtocol>) -> Void) {
+		client.connect(token: token.authenticationToken)
 			.subscribe(onSuccess: { result in
 				switch result {
 				case .success(let data):
