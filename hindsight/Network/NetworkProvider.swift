@@ -224,3 +224,80 @@ extension NetworkProvider {
         }
     }
 }
+
+struct MoyaNetworkProvider: NetworkProviderProtocol {
+
+	func register(user: UserCredentialsProtocol) -> Single<NetworkResult> {
+    	return Single<NetworkResult>.create { _ in
+			return Disposables.create()
+		}
+	}
+
+	/// Login User
+	///
+	/// - Parameter user: user credentials
+	/// - Returns: Single<Result<Bool>>
+	func login(user: UserCredentialsProtocol) -> Single<NetworkResult> {
+		return Single<NetworkResult>.create { _ in
+			return Disposables.create()
+		}
+    }
+
+	/// Connect User
+	///
+	/// - Parameter token: access token
+	/// - Returns: Single<Result<Bool>>
+	func connectFacebook(token: String) -> Single<NetworkResult> {
+		return Single<NetworkResult>.create { _ in
+			print("Connecting to facebook", token)
+			let provider = MoyaProvider<ConnectEndpoint>(plugins: [NetworkLoggerPlugin(verbose: true)])
+			//let provider = MoyaProvider<ConnectEndpoint>()
+			provider.request(.connect(accessToken: token)) { result in
+    			print("Facebook result", result)
+				switch result {
+				case let .success(response):
+					let code = response.statusCode
+					let data = response.data
+					print("DEBUG response", String(data: data, encoding: .utf8) ?? "nil")
+					guard code == 200 else {
+    					print("Facebook failure", code, data)
+						return
+					}
+					print("Facebook response", data)
+				case let .failure(error):
+					print("Facebook failure", error)
+				}
+			}
+			return Disposables.create()
+		}
+	}
+
+	/// get a list of topics
+	///
+	/// - Returns: Single<Result<[TopicProtocol]>>
+	func topics() -> Single<NetworkResult> {
+		return Single<NetworkResult>.create { _ in
+			return Disposables.create()
+		}
+	}
+
+	/// create a topic
+	///
+	/// - Parameter topic: a topic
+	/// - Returns: Single<Result<TopicProtocol>>
+	func create(topic: TopicProtocol) -> Single<NetworkResult> {
+		return Single<NetworkResult>.create { _ in
+			return Disposables.create()
+		}
+	}
+
+	/// get details of a topic
+	///
+	/// - Parameter topic: Topic
+	/// - Returns: Single<Result<TopicProtocol>>
+	func details(topic: TopicProtocol) -> Single<NetworkResult> {
+		return Single<NetworkResult>.create { _ in
+			return Disposables.create()
+		}
+	}
+}

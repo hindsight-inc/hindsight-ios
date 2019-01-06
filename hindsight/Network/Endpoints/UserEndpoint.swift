@@ -9,6 +9,7 @@
 import Foundation
 import Moya
 
+/// Authentication endpoints
 enum AuthEndpoint {
     case register(userName: String, password: String)
     case login(userName: String, password: String)
@@ -83,4 +84,52 @@ extension AuthEndpoint: TargetType {
     public var parameterEncoding: ParameterEncoding {
         return URLEncoding.default
     }
+}
+
+/// SSO endpoints
+enum ConnectEndpoint {
+	case connect(accessToken: String)
+}
+
+extension ConnectEndpoint: TargetType {
+	var baseURL: URL {
+		guard let url = URL(string: "http://localhost:18182") else {
+			fatalError("URL creation failed")
+		}
+		return url
+	}
+
+	var path: String {
+		switch self {
+		case .connect:
+			return Constants.NonUI.Network.Auth.Connect.api
+		}
+	}
+
+	var method: Moya.Method {
+		return .post
+	}
+
+	var sampleData: Data {
+		return Data()
+	}
+
+	var task: Task {
+		switch self {
+		case .connect(let token):
+			let param = [Constants.NonUI.Network.Auth.Connect.Param.method: Constants.NonUI.Network.Auth.Connect.Param.Methods.facebook,
+						 Constants.NonUI.Network.Auth.Connect.Param.accessToken: token]
+			return .requestParameters(parameters:param, encoding: JSONEncoding.default)
+		}
+	}
+
+	/// heades for endpoint
+	var headers: [String: String]? {
+		return ["Content-type": "application/json"]
+	}
+
+	/// The method used for parameter encoding.
+	public var parameterEncoding: ParameterEncoding {
+		return JSONEncoding.default
+	}
 }

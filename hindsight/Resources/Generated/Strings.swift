@@ -26,7 +26,7 @@ internal enum Constants {
           /// /user/connect
           internal static let api = Constants.tr("Localizable", "Non_UI.network.auth.connect.api")
           internal enum Param {
-            /// method
+            /// access_token
             internal static let accessToken = Constants.tr("Localizable", "Non_UI.network.auth.connect.param.access_token")
             /// method
             internal static let method = Constants.tr("Localizable", "Non_UI.network.auth.connect.param.method")

@@ -22,6 +22,6 @@
 "Non_UI.network.auth.connect.api" = "/user/connect";
 "Non_UI.network.auth.connect.param.method" = "method";
 "Non_UI.network.auth.connect.param.methods.facebook" = "facebook";
-"Non_UI.network.auth.connect.param.access_token" = "method";
+"Non_UI.network.auth.connect.param.access_token" = "access_token";
 
 "Button.text.facebookLogin" = "Login With Facebook";

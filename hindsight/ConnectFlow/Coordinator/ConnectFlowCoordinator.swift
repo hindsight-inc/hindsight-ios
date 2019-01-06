@@ -118,7 +118,8 @@ struct Connector {
             }
 
             // TODO: find where FBSDK define these permissions
-            self.loginManager.logIn(withReadPermissions: ["public_profile", "user_friends", "email"], from: self.viewController) { loginResult, error in
+			let permissions = ["public_profile", "user_friends", "email"]
+            self.loginManager.logIn(withReadPermissions: permissions, from: self.viewController) { loginResult, error in
 
                 if let error = error {
                     single(.error(error))
