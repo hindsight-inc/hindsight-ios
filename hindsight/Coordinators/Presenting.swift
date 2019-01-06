@@ -22,6 +22,7 @@ protocol Presenting {
     ///   - presentingViewController: View controller to present from
     ///   - animated: `bool` determining whether or not to animate the presentation
     ///   - completion: Closure to call once presentation has completed
+	// TODO: @Leo rename nc and vc to navigationController and viewController?
     func present(vc: UIViewController,
                  from presentingViewController: UIViewController,
                  animated: Bool, completion: (() -> Void)?)
