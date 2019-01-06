@@ -37,7 +37,7 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
     func presentLogInAsRoot(nc: UINavigationController) {
         let vm = LoginViewModel(facebookConnectClosure: {
             let client = self.container.resolveUnwrapped(ConnectApiClientProtocol.self)
-            Connector(client: client, vc: self.navigationController)
+            Connector(client: client, viewController: self.navigationController)
 				.facebookConnect()
                 .subscribe(
                     onSuccess: { bearer in

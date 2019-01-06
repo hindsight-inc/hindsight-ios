@@ -10,6 +10,8 @@ import RxSwift
 import FBSDKLoginKit
 import FacebookLogin
 
+/// SSO connector. For now other than facebook connect,
+/// we don't have anything else in mind, so it's in its simplest form.
 struct Connector {
 
 	private var viewController: UIViewController
@@ -17,9 +19,9 @@ struct Connector {
 	private let loginManager = FBSDKLoginManager()
 	private let bag = DisposeBag()
 
-	init(client: ConnectApiClientProtocol, vc: UIViewController) {
+	init(client: ConnectApiClientProtocol, viewController: UIViewController) {
 		self.client = client
-		self.viewController = vc
+		self.viewController = viewController
 
 		//FBSDKSettings.enableLoggingBehavior(.none)
 		//FBSDKSettings.loggingBehaviors.removeAll()
