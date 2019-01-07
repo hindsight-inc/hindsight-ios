@@ -44,6 +44,7 @@
 		B39EB40D21E1B29F00C66817 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB40C21E1B29F00C66817 /* NetworkResponse.swift */; };
 		B39EB40F21E1B33900C66817 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB40E21E1B33900C66817 /* Token.swift */; };
 		B39EB41321E1B7D700C66817 /* FacebookConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB41221E1B7D700C66817 /* FacebookConnector.swift */; };
+		B39EB41621E2D5D300C66817 /* Container+UnwrappedResolvedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB41521E2D5D300C66817 /* Container+UnwrappedResolvedTest.swift */; };
 		FDDE27058DC0C1064C682C5F /* Pods_hindsight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28AC9CEAA1029095C1A8EE3D /* Pods_hindsight.framework */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +112,7 @@
 		B39EB40C21E1B29F00C66817 /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
 		B39EB40E21E1B33900C66817 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		B39EB41221E1B7D700C66817 /* FacebookConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookConnector.swift; sourceTree = "<group>"; };
+		B39EB41521E2D5D300C66817 /* Container+UnwrappedResolvedTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Container+UnwrappedResolvedTest.swift"; sourceTree = "<group>"; };
 		D4CAFEF15F10566409793390 /* Pods-hindsightTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hindsightTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hindsightTests/Pods-hindsightTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D7AB948399AB4587E52B8D53 /* Pods-hindsight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hindsight.release.xcconfig"; path = "Pods/Target Support Files/Pods-hindsight/Pods-hindsight.release.xcconfig"; sourceTree = "<group>"; };
 		DB48E6B288FD364AF7DE767C /* Pods_hindsightUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hindsightUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,6 +207,7 @@
 			children = (
 				13BA21F1217278FA00064C03 /* hindsightTests.swift */,
 				48B81A4E217FB71600E88970 /* DynamicProviderTest.swift */,
+				B39EB41521E2D5D300C66817 /* Container+UnwrappedResolvedTest.swift */,
 				13BA21F3217278FA00064C03 /* Info.plist */,
 			);
 			path = hindsightTests;
@@ -780,6 +783,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48B81A4F217FB71600E88970 /* DynamicProviderTest.swift in Sources */,
+				B39EB41621E2D5D300C66817 /* Container+UnwrappedResolvedTest.swift in Sources */,
 				13BA21F2217278FA00064C03 /* hindsightTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
