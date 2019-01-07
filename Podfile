@@ -24,7 +24,13 @@ target 'hindsight' do
   pod 'SnapKit'
   pod 'SwiftLint'
   pod 'RealmSwift'
-  
+# pod 'FBSDKLoginKit'
+
+    pod 'FBSDKCoreKit', :git => 'https://github.com/facebook/facebook-objc-sdk.git', :branch => 'master'
+    pod 'FacebookCore'
+    pod 'FacebookLogin'
+    pod 'FacebookShare'
+
    target 'hindsightTests' do
     inherit!  :search_paths
     testing_pods

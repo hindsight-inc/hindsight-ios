@@ -6,6 +6,8 @@
 //  Copyright © 2018 hindsight-inc. All rights reserved.
 //
 
+// XCTest will be removed - use Quick & Nimble instead
+/*
 import XCTest
 @testable import hindsight
 
@@ -32,3 +34,4 @@ class HindsightTests: XCTestCase {
     }
 
 }
+*/

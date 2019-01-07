@@ -1,6 +1,31 @@
 PODS:
   - Alamofire (4.7.3)
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.9.0)
   - Cuckoo (0.12.0)
+  - FacebookCore (0.5.0):
+    - Bolts (~> 1.9)
+    - FBSDKCoreKit (~> 4.37)
+  - FacebookLogin (0.5.0):
+    - Bolts (~> 1.9)
+    - FacebookCore (~> 0.5)
+    - FBSDKCoreKit (~> 4.37)
+    - FBSDKLoginKit (~> 4.37)
+  - FacebookShare (0.5.0):
+    - Bolts (~> 1.9)
+    - FacebookCore (~> 0.5)
+    - FBSDKCoreKit (~> 4.37)
+    - FBSDKShareKit (~> 4.37)
+  - FBSDKCoreKit (4.39.0):
+    - Bolts (~> 1.9)
+  - FBSDKLoginKit (4.39.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.39.0):
+    - FBSDKCoreKit
   - Moya (11.0.2):
     - Moya/Core (= 11.0.2)
   - Moya/Core (11.0.2):
@@ -35,6 +60,10 @@ PODS:
 
 DEPENDENCIES:
   - Cuckoo
+  - FacebookCore
+  - FacebookLogin
+  - FacebookShare
+  - FBSDKCoreKit (from `https://github.com/facebook/facebook-objc-sdk.git`, branch `master`)
   - Moya
   - Moya/RxSwift
   - Nimble
@@ -52,7 +81,13 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - Bolts
     - Cuckoo
+    - FacebookCore
+    - FacebookLogin
+    - FacebookShare
+    - FBSDKLoginKit
+    - FBSDKShareKit
     - Moya
     - Nimble
     - Quick
@@ -69,9 +104,26 @@ SPEC REPOS:
     - SwiftLint
     - Swinject
 
+EXTERNAL SOURCES:
+  FBSDKCoreKit:
+    :branch: master
+    :git: https://github.com/facebook/facebook-objc-sdk.git
+
+CHECKOUT OPTIONS:
+  FBSDKCoreKit:
+    :commit: aaa76238dc15c4c297ee9fad1fdce1bcb2fcff7b
+    :git: https://github.com/facebook/facebook-objc-sdk.git
+
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Cuckoo: d30b6c149e52ffbcfe6b4a9543e4627d08947274
+  FacebookCore: 74288d0add931d361b1596beae787ab72c438249
+  FacebookLogin: ebcf34714a1cb9f0759d9f071cfb01ed500996cf
+  FacebookShare: 963b4bb1124a64a395b1e428163d70b5774116e8
+  FBSDKCoreKit: 1e3981faefab8c88edfaa9eecd94aab02d99a9bc
+  FBSDKLoginKit: 30ba5039a2c53d65a75103889bc2deebdacd5a1f
+  FBSDKShareKit: 5a0021c30abb64df9eeba87351dd8a627874543b
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   Nimble: 04f732da099ea4d153122aec8c2a88fd0c7219ae
   Quick: 2623cb30d7a7f41ca62f684f679586558f483d46
@@ -88,6 +140,6 @@ SPEC CHECKSUMS:
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
   Swinject: 82cdb851f63f91bba974e3eca1d69780f2f7677e
 
-PODFILE CHECKSUM: 5994512f38f06fd8879f3378434ef75ea0f044bf
+PODFILE CHECKSUM: 370cbf860d39f3e04b03dab118d00632f759b37e
 
 COCOAPODS: 1.5.3
