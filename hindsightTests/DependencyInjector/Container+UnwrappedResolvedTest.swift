@@ -1,11 +1,3 @@
-//
-//  DynamicProviderTest.swift
-//  hindsightTests
-//
-//  Created by Sanwal, Manish on 10/23/18.
-//  Copyright © 2018 hindsight-inc. All rights reserved.
-//
-
 import Nimble
 import Quick
 import Swinject
