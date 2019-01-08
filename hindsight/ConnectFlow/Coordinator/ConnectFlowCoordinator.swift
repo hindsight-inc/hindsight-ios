@@ -36,10 +36,13 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
     //  TODO: @Manish remove nc as we are using self.navigationController?
     func presentLogInAsRoot(nc: UINavigationController) {
         let vm = LoginViewModel(facebookConnectClosure: {
-            let client = self.container.resolveUnwrapped(ConnectApiClientProtocol.self)
-			let connector = self.container.resolveUnwrapped(SSOConnectorProtocol.self, arguments:
-				client, self.navigationController as UIViewController)
-			connector.connect()
+            let client = self.container.resolved(ConnectApiClientProtocol.self)!
+			let connector = self.container.resolve(SSOConnectorProtocol.self, arguments:
+				client, self.navigationController as UIViewController)!
+            let connector = self.container.resolve(SSOConnectorProtocol.self)!
+
+            connector
+                .connect()
                 .subscribe(
                     onSuccess: { bearer in
                         print("ON success", bearer)

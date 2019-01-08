@@ -25,7 +25,7 @@ struct DependencyConfigurator {
     /// Register dependencies for connect flow
     ///
     /// - Parameter container: a swinject container
-    static func registerConnectFlowDependencies(container: Container) {
+    static func registerConnectFlowDependencies(container: Container, presenter: UIViewController) {
 		/// Resolving top level dependencies
         let networkProvider = container.resolveUnwrapped(NetworkProviderProtocol.self)
 
@@ -36,8 +36,10 @@ struct DependencyConfigurator {
 		container.register(ErrorPresentingProtocol.self) { _, viewController in
 			AlertErrorPresenter(viewController: viewController)
 		}
-		container.register(SSOConnectorProtocol.self) { _, client, viewController in
-			FacebookConnector(client: client, viewController: viewController)
+        let client = container.resolveUnwrapped(Service.Type)
+		container.register(SSOConnectorProtocol.self) { _, client in
+			//FacebookConnector(client: client, viewController: presenter)
+            AnotherConnector(client: client)
 		}
     }
 

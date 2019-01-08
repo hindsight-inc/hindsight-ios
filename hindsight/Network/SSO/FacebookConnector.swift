@@ -11,7 +11,7 @@ import FacebookCore
 import FacebookLogin
 
 protocol SSOConnectorProtocol {
-	init(client: ConnectApiClientProtocol, viewController: UIViewController)
+	//init(client: ConnectApiClientProtocol, viewController: UIViewController)
 	func connect() -> Single<TokenProtocol>
 }
 
@@ -20,6 +20,7 @@ protocol SSOConnectorProtocol {
 struct FacebookConnector: SSOConnectorProtocol {
 
 	private var viewController: UIViewController
+    public var presenterView: ()->UIViewController
 	private let client: ConnectApiClientProtocol
 	private let loginManager = LoginManager()
 	private let bag = DisposeBag()
@@ -33,8 +34,28 @@ struct FacebookConnector: SSOConnectorProtocol {
 		loginManager.logOut()
 	}
 
+    func connect() -> Single<Result<TokenProtocol>> {
+        let permissions: [ReadPermission] = [
+            .publicProfile,
+            .userFriends,
+            .email
+        ]
+        self.loginManager.logIn(readPermissions: permissions, viewController: self.presenterView()) { result in
+            switch result {
+            case .success(_, _, let token):
+                self.hindsightConnect(token: token, single: single)
+            case .failed(let error):
+                single(.error(error))
+            case .cancelled:
+                single(.error(NSError(domain: "FB connect cancelled", code: -1)))
+            }
+        }
+    }
+
+
 	func connect() -> Single<TokenProtocol> {
-		return Single<TokenProtocol>.create { single in
+		return Single<TokenProtocol>
+            .create { single in
 			if let token = AccessToken.current {
 				print("FB token exists", token.authenticationToken)
 				self.hindsightConnect(token: token, single: single)
@@ -46,7 +67,7 @@ struct FacebookConnector: SSOConnectorProtocol {
 				.userFriends,
 				.email
 			]
-			self.loginManager.logIn(readPermissions: permissions, viewController: self.viewController) { result in
+			self.loginManager.logIn(readPermissions: permissions, viewController: self.presenterView()) { result in
 				switch result {
 				case .success(_, _, let token):
     				self.hindsightConnect(token: token, single: single)

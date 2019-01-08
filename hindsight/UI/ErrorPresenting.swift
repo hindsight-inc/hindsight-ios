@@ -14,7 +14,9 @@ protocol ErrorPresentingProtocol {
 }
 
 struct AlertErrorPresenter: ErrorPresentingProtocol {
-	public var viewController: UIViewController
+//    public var viewController: UIViewController
+
+    public var present: (UIAlertController) -> Void
 
 	public func show(error: Error) {
 		let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
@@ -24,7 +26,8 @@ struct AlertErrorPresenter: ErrorPresentingProtocol {
 		}
 		alertController.addAction(okAction)
 
-		viewController.present(alertController, animated: true) {
-		}
+//        viewController.present(alertController, animated: true) {
+//        }
+        present(alertController)
 	}
 }
