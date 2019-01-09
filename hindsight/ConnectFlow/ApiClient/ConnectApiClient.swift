@@ -10,11 +10,11 @@ import Foundation
 import RxSwift
 
 // TODO: @Leo rename to ConnnectAPIClientProtocol etc.?
-protocol ConnectApiClientProtocol {
+protocol ConnectAPIClientProtocol {
     func connect(token: String) -> Single<NetworkResult>
 }
 
-struct ConnectApiClient: ConnectApiClientProtocol {
+struct ConnectApiClient: ConnectAPIClientProtocol {
 
     let networkProvider: NetworkProviderProtocol
 

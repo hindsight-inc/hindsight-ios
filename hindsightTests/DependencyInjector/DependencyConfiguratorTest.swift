@@ -24,7 +24,7 @@ class DependencyConfiguratorTest: QuickSpec {
 				DependencyConfigurator.registerConnectFlowDependencies(container: container, viewController: UIViewController())
 
 				it("should resolve connect API client") {
-					let client = container.resolveUnwrapped(ConnectApiClientProtocol.self)
+					let client = container.resolveUnwrapped(ConnectAPIClientProtocol.self)
 					expect(client).toNot(beNil())
 				}
 

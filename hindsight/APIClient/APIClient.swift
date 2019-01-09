@@ -1,5 +1,5 @@
 //
-//  ApiClient.swift
+//  APIClient.swift
 //  hindsight
 //
 //  Created by Sanwal, Manish on 11/5/18.

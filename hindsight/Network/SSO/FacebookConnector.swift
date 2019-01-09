@@ -20,11 +20,11 @@ protocol SSOConnectorProtocol {
 struct FacebookConnector: SSOConnectorProtocol {
 
 	private var viewControllerClosure: () -> UIViewController
-	private let client: ConnectApiClientProtocol
+	private let client: ConnectAPIClientProtocol
 	private let loginManager = LoginManager()
 	private let bag = DisposeBag()
 
-	init(client: ConnectApiClientProtocol, viewControllerClosure: @escaping () -> UIViewController) {
+	init(client: ConnectAPIClientProtocol, viewControllerClosure: @escaping () -> UIViewController) {
 		self.client = client
 		self.viewControllerClosure = viewControllerClosure
 
@@ -84,7 +84,7 @@ struct FacebookConnector: SSOConnectorProtocol {
 			}, onError: { error in
 				single(.error(error))
 			})
-			//.disposed(by: self.bag)	// TODO: @Leo how to hold `bag` here?
+			//.disposed(by: self.bag)	// TODO: @Manish how to hold `bag` here?
 			.disposed(by: globalBag)
 	}
 }
