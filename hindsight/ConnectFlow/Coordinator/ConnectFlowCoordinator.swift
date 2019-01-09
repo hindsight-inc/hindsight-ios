@@ -28,7 +28,7 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
         self.container = container
         self.navigationController = nc
         //  TODO: @Manish why static func here instead of transient object?
-        DependencyConfigurator.registerConnectFlowDependencies(container: container)
+		DependencyConfigurator.registerConnectFlowDependencies(container: container, viewController: self.navigationController)
     }
 
     private let bag = DisposeBag()
@@ -36,13 +36,8 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
     //  TODO: @Manish remove nc as we are using self.navigationController?
     func presentLogInAsRoot(nc: UINavigationController) {
         let vm = LoginViewModel(facebookConnectClosure: {
-            let client = self.container.resolved(ConnectApiClientProtocol.self)!
-			let connector = self.container.resolve(SSOConnectorProtocol.self, arguments:
-				client, self.navigationController as UIViewController)!
-            let connector = self.container.resolve(SSOConnectorProtocol.self)!
-
-            connector
-                .connect()
+			let connector = self.container.resolveUnwrapped(SSOConnectorProtocol.self)
+            connector.connect()
                 .subscribe(
                     onSuccess: { bearer in
                         print("ON success", bearer)
@@ -68,8 +63,9 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 	}
 
 	private func connectFailure(error: Error) {
-		let viewController: UIViewController = navigationController
-		let errorPresenter = container.resolveUnwrapped(ErrorPresentingProtocol.self, argument: viewController)
-		errorPresenter.show(error: error)
+		let errorPresenter = container.resolveUnwrapped(ErrorPresentingProtocol.self)
+		let errorViewController = errorPresenter.errorViewController(error: error)
+		navigationController.present(errorViewController, animated: true) {
+		}
 	}
 }
