@@ -12,7 +12,7 @@ import Swinject
 import RxSwift
 
 protocol ConnectFlowCoordinatorProtocol {
-    func presentLogInAsRoot(nc: UINavigationController)
+    func presentLogInAsRoot()
 }
 
 struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProviding {
@@ -33,8 +33,7 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 
     private let bag = DisposeBag()
 
-    //  TODO: @Manish remove nc as we are using self.navigationController?
-    func presentLogInAsRoot(nc: UINavigationController) {
+    func presentLogInAsRoot() {
         let vm = LoginViewModel(facebookConnectClosure: {
 			let connector = self.container.resolveUnwrapped(SSOConnectorProtocol.self)
             connector.connect()
