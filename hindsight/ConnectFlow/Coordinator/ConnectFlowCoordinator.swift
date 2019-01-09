@@ -23,12 +23,13 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 
     private let navigationController: UINavigationController
 
-    init(presenter: Presenting, container: Container, nc: UINavigationController) {
+    init(presenter: Presenting, container: Container, navigationController: UINavigationController) {
         self.presenter = presenter
         self.container = container
-        self.navigationController = nc
+        self.navigationController = navigationController
         //  TODO: @Manish why static func here instead of transient object?
-		DependencyConfigurator.registerConnectFlowDependencies(container: container, viewController: self.navigationController)
+		DependencyConfigurator.registerConnectFlowDependencies(container: container,
+															   viewController: self.navigationController)
     }
 
     private let bag = DisposeBag()
@@ -51,14 +52,14 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
         })
         let vc = LoginViewController(viewModel: vm)
         navigationController.isNavigationBarHidden = true
-        presenter.makeRoot(vc: vc, nc: navigationController)
+        presenter.makeRoot(viewController: vc, navigationController: navigationController)
     }
 
 	private func connectSuccess(token: String) {
 		// TokenManager().setToken(token)
 		// TODO: @Leo how to get next vc?
 		let vc = UIViewController()
-		presenter.push(vc: vc, onto: navigationController, animated: true)
+		presenter.push(viewController: vc, onto: navigationController, animated: true)
 	}
 
 	private func connectFailure(error: Error) {

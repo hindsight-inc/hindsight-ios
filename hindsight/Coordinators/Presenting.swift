@@ -18,12 +18,11 @@ protocol Presenting {
     /// Present the given view controller modally
     ///
     /// - Parameters:
-    ///   - vc: View controller to present
+    ///   - viewController: View controller to present
     ///   - presentingViewController: View controller to present from
     ///   - animated: `bool` determining whether or not to animate the presentation
     ///   - completion: Closure to call once presentation has completed
-	// TODO: @Leo rename nc and vc to navigationController and viewController?
-    func present(vc: UIViewController,
+    func present(viewController: UIViewController,
                  from presentingViewController: UIViewController,
                  animated: Bool, completion: (() -> Void)?)
 
@@ -38,24 +37,24 @@ protocol Presenting {
     /// Push a given view controller onto the given navigation controller
     ///
     /// - Parameters:
-    ///   - vc: View controller to be pushed
-    ///   - nc: Navigation controller onto which `vc` is to be pushed
+    ///   - viewController: View controller to be pushed
+    ///   - navigationController: Navigation controller onto which `viewController` is to be pushed
     ///   - animated: `bool` determining whether or not to animate the presentation
-    func push(vc: UIViewController, onto nc: UINavigationController, animated: Bool)
+    func push(viewController: UIViewController, onto navigationController: UINavigationController, animated: Bool)
 
     /// Pop the top view controller off of the given navigation controller
     ///
     /// - Parameters:
-    ///   - nc: Navigation controller from which the view controller is to be popped
+    ///   - navigationController: Navigation controller from which the view controller is to be popped
     ///   - animated: `bool` determining whether or not to animate the presentation
-    func pop(nc: UINavigationController, animated: Bool)
+    func pop(navigationController: UINavigationController, animated: Bool)
 
     /// makes the view passed in as the root view of the navigation controller
     ///
     /// - Parameters:
-    ///   - vc: the view controller to be made root
-    ///   - nc: UINavigationController
-    func makeRoot(vc: UIViewController, nc: UINavigationController)
+    ///   - viewController: the view controller to be made root
+    ///   - navigationController: UINavigationController
+    func makeRoot(viewController: UIViewController, navigationController: UINavigationController)
 }
 
 /// a presenting provide which will be used by the flow coordinators
@@ -76,14 +75,14 @@ struct DefaultPresenter: Presenting {
     /// Present the given view controller modally
     ///
     /// - Parameters:
-    ///   - vc: View controller to present
+    ///   - viewController: View controller to present
     ///   - presentingViewController: View controller to present from
     ///   - animated: `bool` determining whether or not to animate the presentation
     ///   - completion: Closure to call once presentation has completed
-    func present(vc: UIViewController,
+    func present(viewController: UIViewController,
                  from presentingViewController: UIViewController,
                  animated: Bool, completion: (() -> Void)?) {
-        presentingViewController.present(vc, animated: animated, completion: completion)
+        presentingViewController.present(viewController, animated: animated, completion: completion)
     }
 
     /// Dismiss the given modally presented view controller
@@ -99,28 +98,28 @@ struct DefaultPresenter: Presenting {
     /// Push a given view controller onto the given navigation controller
     ///
     /// - Parameters:
-    ///   - vc: View controller to be pushed
-    ///   - nc: Navigation controller onto which `vc` is to be pushed
+    ///   - viewController: View controller to be pushed
+    ///   - navigationController: Navigation controller onto which `viewController` is to be pushed
     ///   - animated: `bool` determining whether or not to animate the presentation
-    func push(vc: UIViewController, onto nc: UINavigationController, animated: Bool) {
-        nc.pushViewController(vc, animated: animated)
+    func push(viewController: UIViewController, onto navigationController: UINavigationController, animated: Bool) {
+        navigationController.pushViewController(viewController, animated: animated)
     }
 
     /// Pop the top view controller off of the given navigation controller
     ///
     /// - Parameters:
-    ///   - nc: Navigation controller from which the view controller is to be popped
+    ///   - navigationController: Navigation controller from which the view controller is to be popped
     ///   - animated: `bool` determining whether or not to animate the presentation
-    func pop(nc: UINavigationController, animated: Bool) {
-        nc.popViewController(animated: animated)
+    func pop(navigationController: UINavigationController, animated: Bool) {
+        navigationController.popViewController(animated: animated)
     }
 
     /// makes the view passed in as the root view of the navigation controller
     ///
     /// - Parameters:
-    ///   - vc: the view controller to be made root
-    ///   - nc: UINavigationController
-    func makeRoot(vc: UIViewController, nc: UINavigationController) {
-        nc.viewControllers = [vc]
+    ///   - viewController: the view controller to be made root
+    ///   - navigationController: UINavigationController
+    func makeRoot(viewController: UIViewController, navigationController: UINavigationController) {
+        navigationController.viewControllers = [viewController]
     }
 }

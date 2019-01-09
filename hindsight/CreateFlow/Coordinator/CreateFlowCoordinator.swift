@@ -11,7 +11,7 @@ import UIKit
 import Swinject
 
 protocol CreateFlowCoordinatorProtocol {
-    func presentCreateView(nc: UINavigationController)
+    func presentCreateView(navigationController: UINavigationController)
 }
 
 struct CreateFlowCoordinator: CreateFlowCoordinatorProtocol, PresenterProviding {
@@ -22,14 +22,14 @@ struct CreateFlowCoordinator: CreateFlowCoordinatorProtocol, PresenterProviding 
 
     private let navigationController: UINavigationController
 
-    init(presenter: Presenting, container: Container, nc: UINavigationController) {
+    init(presenter: Presenting, container: Container, navigationController: UINavigationController) {
         self.presenter = presenter
         self.container = container
-        self.navigationController = nc
+        self.navigationController = navigationController
         DependencyConfigurator.registerCreateFlowDependencies(container: container)
     }
 
-    func presentCreateView(nc: UINavigationController) {
+    func presentCreateView(navigationController: UINavigationController) {
 
     }
 }
