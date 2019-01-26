@@ -47,6 +47,7 @@
 		B39EB41621E2D5D300C66817 /* Container+UnwrappedResolvedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB41521E2D5D300C66817 /* Container+UnwrappedResolvedTest.swift */; };
 		B39EB41821E2E48F00C66817 /* DependencyConfiguratorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB41721E2E48F00C66817 /* DependencyConfiguratorTest.swift */; };
 		B39EB41C21E2F8FC00C66817 /* ConnectEndpointTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB41B21E2F8FC00C66817 /* ConnectEndpointTest.swift */; };
+		B3F810EA21FD025E00E84596 /* ListFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F810E921FD025E00E84596 /* ListFlowCoordinator.swift */; };
 		FDDE27058DC0C1064C682C5F /* Pods_hindsight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28AC9CEAA1029095C1A8EE3D /* Pods_hindsight.framework */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +118,7 @@
 		B39EB41521E2D5D300C66817 /* Container+UnwrappedResolvedTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Container+UnwrappedResolvedTest.swift"; sourceTree = "<group>"; };
 		B39EB41721E2E48F00C66817 /* DependencyConfiguratorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyConfiguratorTest.swift; sourceTree = "<group>"; };
 		B39EB41B21E2F8FC00C66817 /* ConnectEndpointTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectEndpointTest.swift; sourceTree = "<group>"; };
+		B3F810E921FD025E00E84596 /* ListFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowCoordinator.swift; sourceTree = "<group>"; };
 		D4CAFEF15F10566409793390 /* Pods-hindsightTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hindsightTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hindsightTests/Pods-hindsightTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D7AB948399AB4587E52B8D53 /* Pods-hindsight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hindsight.release.xcconfig"; path = "Pods/Target Support Files/Pods-hindsight/Pods-hindsight.release.xcconfig"; sourceTree = "<group>"; };
 		DB48E6B288FD364AF7DE767C /* Pods_hindsightUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hindsightUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,10 +191,11 @@
 			isa = PBXGroup;
 			children = (
 				FA65B5E021C9A2B900FCBCA5 /* hindsight.entitlements */,
-				489984722190A60C00ADE46E /* DependencyInjector */,
-				489984842192258400ADE46E /* DetailsFlow */,
 				489984832192257800ADE46E /* CreateFlow */,
 				489984772190B34400ADE46E /* ConnectFlow */,
+				B3F810E721FD01A300E84596 /* ListFlow */,
+				489984842192258400ADE46E /* DetailsFlow */,
+				489984722190A60C00ADE46E /* DependencyInjector */,
 				4899846F2190A56A00ADE46E /* APIClient */,
 				4899846A2190A3A700ADE46E /* Coordinators */,
 				AF0E8942219B823C00F06D76 /* UI */,
@@ -445,6 +448,22 @@
 				B39EB41B21E2F8FC00C66817 /* ConnectEndpointTest.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		B3F810E721FD01A300E84596 /* ListFlow */ = {
+			isa = PBXGroup;
+			children = (
+				B3F810E821FD024800E84596 /* Coordinator */,
+			);
+			path = ListFlow;
+			sourceTree = "<group>";
+		};
+		B3F810E821FD024800E84596 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				B3F810E921FD025E00E84596 /* ListFlowCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		E42278061E85FFEA0695CF24 /* Pods */ = {
@@ -782,6 +801,7 @@
 				13BA21DD217278F900064C03 /* AppDelegate.swift in Sources */,
 				489984712190A5D400ADE46E /* APIClient.swift in Sources */,
 				48998493219B6FA100ADE46E /* Strings.swift in Sources */,
+				B3F810EA21FD025E00E84596 /* ListFlowCoordinator.swift in Sources */,
 				55A4589F219BB04100C5A042 /* LoginButtonViewModel.swift in Sources */,
 				B39EB40D21E1B29F00C66817 /* NetworkResponse.swift in Sources */,
 				4899847D2190B40E00ADE46E /* ConnectFlowCoordinator.swift in Sources */,

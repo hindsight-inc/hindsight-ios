@@ -36,11 +36,15 @@ class BaseFlowCoordinator: PresenterProviding {
                                navigationController: navigationController)
     }()
 
-    lazy var detailFlow: DetailFlowCoordinatorProtocol = {
-        DetailFlowCoordinator(presenter: presenter,
-                               container: Container(parent: container),
-                               navigationController: navigationController)
-    }()
+	lazy var listFlow: ListFlowCoordinatorProtocol = {
+		ListFlowCoordinator(presenter: presenter)
+	}()
+
+	lazy var detailFlow: DetailFlowCoordinatorProtocol = {
+		DetailFlowCoordinator(presenter: presenter,
+							  container: Container(parent: container),
+							  navigationController: navigationController)
+	}()
 
 //    lazy var createFlow: ConnectFlowCoordinatorProtocol = {
 //        ConnectFlowCoordinator(presenter: presenter,
@@ -70,7 +74,7 @@ class BaseFlowCoordinator: PresenterProviding {
     ///            directives prescribed in the `launchOptions` dictionary.
     func presentRootInterface(application: UIApplication,
                               withOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        configureNavigationControllerForLaunch(nc: navigationController)
+        configureNavigationControllerForLaunch(navigationController: navigationController)
         configureWindow(window: mainWindow, rootNavigationController: navigationController)
         presenter.makeKeyAndVisible(window: mainWindow)
         connectFlow.presentLogInAsRoot()
@@ -82,7 +86,7 @@ class BaseFlowCoordinator: PresenterProviding {
     /// Configure a `UINavigationController` to present a `LaunchViewController` as it's top view controller
     ///
     /// - Parameter nc: `UINavigationController` to configure
-    func configureNavigationControllerForLaunch(nc: UINavigationController) {
+    func configureNavigationControllerForLaunch(navigationController: UINavigationController) {
         // configure navigationBar here
     }
 
@@ -104,4 +108,12 @@ class BaseFlowCoordinator: PresenterProviding {
             [NSAttributedString.Key.foregroundColor: ColorName.hindsightWhite.color]
         // font - NSFontAttributeName: FontFamily.Interstate.regular.font(size: 16.0)
     }
+
+    // MARK: - Push Topic List
+
+	func pushList() {
+		//listFlow.push()
+		let viewController = UIViewController()
+		presenter.push(viewController: viewController, onto: navigationController, animated: true)
+	}
 }

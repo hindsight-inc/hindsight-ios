@@ -17,6 +17,7 @@ protocol DetailFlowCoordinatorProtocol {
 
 struct DetailFlowCoordinator: DetailFlowCoordinatorProtocol, PresenterProviding {
 
+	// TODO: @leo why `internal` here?
     internal let presenter: Presenting
 
     private let container: Container
