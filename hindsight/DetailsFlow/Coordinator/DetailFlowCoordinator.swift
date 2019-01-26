@@ -11,8 +11,8 @@ import UIKit
 import Swinject
 
 protocol DetailFlowCoordinatorProtocol {
-    func presentFeed(nc: UINavigationController)
-    func presentDetails(/*feed here,*/nc: UINavigationController)
+    func presentFeed(navigationController: UINavigationController)
+    func presentDetails(/*feed here,*/navigationController: UINavigationController)
 }
 
 struct DetailFlowCoordinator: DetailFlowCoordinatorProtocol, PresenterProviding {
@@ -23,16 +23,16 @@ struct DetailFlowCoordinator: DetailFlowCoordinatorProtocol, PresenterProviding 
 
     private let navigationController: UINavigationController
 
-    init(presenter: Presenting, container: Container, nc: UINavigationController) {
+    init(presenter: Presenting, container: Container, navigationController: UINavigationController) {
         self.presenter = presenter
         self.container = container
-        self.navigationController = nc
+        self.navigationController = navigationController
     }
 
-    func presentFeed(nc: UINavigationController) {
+    func presentFeed(navigationController: UINavigationController) {
 
     }
-    func presentDetails(/*feed here,*/nc: UINavigationController) {
+    func presentDetails(/*feed here,*/navigationController: UINavigationController) {
 
     }
 }

@@ -8,23 +8,23 @@
 
 import UIKit
 
+/// Preparing UI component(s) to present an error
 protocol ErrorPresentingProtocol {
-	var viewController: UIViewController { get set }
-	func show(error: Error)
+
+	/// Getting a `UIViewController` from an `Error`
+	func errorViewController(error: Error) -> UIViewController
 }
 
+/// Preparing a `UIAlertViewController` to present an error
 struct AlertErrorPresenter: ErrorPresentingProtocol {
-	public var viewController: UIViewController
 
-	public func show(error: Error) {
+	func errorViewController(error: Error) -> UIViewController {
 		let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
 
 		let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-			print("Cancel button pressed")
 		}
 		alertController.addAction(okAction)
 
-		viewController.present(alertController, animated: true) {
-		}
+        return alertController
 	}
 }

@@ -23,7 +23,7 @@
 		484C4A012177B7C1005DAD02 /* UserCredentialsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484C4A002177B7C1005DAD02 /* UserCredentialsProtocol.swift */; };
 		4899846C2190A3CB00ADE46E /* BaseFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899846B2190A3CB00ADE46E /* BaseFlowCoordinator.swift */; };
 		4899846E2190A45B00ADE46E /* Presenting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899846D2190A45B00ADE46E /* Presenting.swift */; };
-		489984712190A5D400ADE46E /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489984702190A5D400ADE46E /* ApiClient.swift */; };
+		489984712190A5D400ADE46E /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489984702190A5D400ADE46E /* APIClient.swift */; };
 		489984742190A65200ADE46E /* Container+UnwrappedResolved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489984732190A65200ADE46E /* Container+UnwrappedResolved.swift */; };
 		489984762190A74200ADE46E /* DependencyConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489984752190A74200ADE46E /* DependencyConfigurator.swift */; };
 		4899847A2190B36F00ADE46E /* ConnectApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489984792190B36F00ADE46E /* ConnectApiClient.swift */; };
@@ -93,7 +93,7 @@
 		484C4A002177B7C1005DAD02 /* UserCredentialsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentialsProtocol.swift; sourceTree = "<group>"; };
 		4899846B2190A3CB00ADE46E /* BaseFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFlowCoordinator.swift; sourceTree = "<group>"; };
 		4899846D2190A45B00ADE46E /* Presenting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenting.swift; sourceTree = "<group>"; };
-		489984702190A5D400ADE46E /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		489984702190A5D400ADE46E /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		489984732190A65200ADE46E /* Container+UnwrappedResolved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+UnwrappedResolved.swift"; sourceTree = "<group>"; };
 		489984752190A74200ADE46E /* DependencyConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyConfigurator.swift; sourceTree = "<group>"; };
 		489984792190B36F00ADE46E /* ConnectApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectApiClient.swift; sourceTree = "<group>"; };
@@ -193,7 +193,7 @@
 				489984842192258400ADE46E /* DetailsFlow */,
 				489984832192257800ADE46E /* CreateFlow */,
 				489984772190B34400ADE46E /* ConnectFlow */,
-				4899846F2190A56A00ADE46E /* ApiClient */,
+				4899846F2190A56A00ADE46E /* APIClient */,
 				4899846A2190A3A700ADE46E /* Coordinators */,
 				AF0E8942219B823C00F06D76 /* UI */,
 				484C49F9217682BA005DAD02 /* Model */,
@@ -267,12 +267,12 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
-		4899846F2190A56A00ADE46E /* ApiClient */ = {
+		4899846F2190A56A00ADE46E /* APIClient */ = {
 			isa = PBXGroup;
 			children = (
-				489984702190A5D400ADE46E /* ApiClient.swift */,
+				489984702190A5D400ADE46E /* APIClient.swift */,
 			);
-			path = ApiClient;
+			path = APIClient;
 			sourceTree = "<group>";
 		};
 		489984722190A60C00ADE46E /* DependencyInjector */ = {
@@ -780,7 +780,7 @@
 				55A4589D219BB01600C5A042 /* LoginButtonState.swift in Sources */,
 				B39EB40F21E1B33900C66817 /* Token.swift in Sources */,
 				13BA21DD217278F900064C03 /* AppDelegate.swift in Sources */,
-				489984712190A5D400ADE46E /* ApiClient.swift in Sources */,
+				489984712190A5D400ADE46E /* APIClient.swift in Sources */,
 				48998493219B6FA100ADE46E /* Strings.swift in Sources */,
 				55A4589F219BB04100C5A042 /* LoginButtonViewModel.swift in Sources */,
 				B39EB40D21E1B29F00C66817 /* NetworkResponse.swift in Sources */,

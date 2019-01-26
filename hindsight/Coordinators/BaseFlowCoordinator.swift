@@ -33,13 +33,13 @@ class BaseFlowCoordinator: PresenterProviding {
     lazy var connectFlow: ConnectFlowCoordinatorProtocol = {
         ConnectFlowCoordinator(presenter: presenter,
                                container: Container(parent: container),
-                               nc: navigationController)
+                               navigationController: navigationController)
     }()
 
     lazy var detailFlow: DetailFlowCoordinatorProtocol = {
         DetailFlowCoordinator(presenter: presenter,
                                container: Container(parent: container),
-                               nc: navigationController)
+                               navigationController: navigationController)
     }()
 
 //    lazy var createFlow: ConnectFlowCoordinatorProtocol = {
@@ -73,7 +73,7 @@ class BaseFlowCoordinator: PresenterProviding {
         configureNavigationControllerForLaunch(nc: navigationController)
         configureWindow(window: mainWindow, rootNavigationController: navigationController)
         presenter.makeKeyAndVisible(window: mainWindow)
-        connectFlow.presentLogInAsRoot(nc: navigationController)
+        connectFlow.presentLogInAsRoot()
         return true
     }
 

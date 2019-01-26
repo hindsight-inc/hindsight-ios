@@ -12,7 +12,7 @@ import Swinject
 import RxSwift
 
 protocol ConnectFlowCoordinatorProtocol {
-    func presentLogInAsRoot(nc: UINavigationController)
+    func presentLogInAsRoot()
 }
 
 struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProviding {
@@ -23,23 +23,21 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 
     private let navigationController: UINavigationController
 
-    init(presenter: Presenting, container: Container, nc: UINavigationController) {
+    init(presenter: Presenting, container: Container, navigationController: UINavigationController) {
         self.presenter = presenter
         self.container = container
-        self.navigationController = nc
+        self.navigationController = navigationController
         //  TODO: @Manish why static func here instead of transient object?
-        DependencyConfigurator.registerConnectFlowDependencies(container: container)
+		DependencyConfigurator.registerConnectFlowDependencies(container: container,
+															   viewController: self.navigationController)
     }
 
     private let bag = DisposeBag()
 
-    //  TODO: @Manish remove nc as we are using self.navigationController?
-    func presentLogInAsRoot(nc: UINavigationController) {
+    func presentLogInAsRoot() {
         let vm = LoginViewModel(facebookConnectClosure: {
-            let client = self.container.resolveUnwrapped(ConnectApiClientProtocol.self)
-			let connector = self.container.resolveUnwrapped(SSOConnectorProtocol.self, arguments:
-				client, self.navigationController as UIViewController)
-			connector.connect()
+			let connector = self.container.resolveUnwrapped(SSOConnectorProtocol.self)
+            connector.connect()
                 .subscribe(
                     onSuccess: { bearer in
                         print("ON success", bearer)
@@ -54,19 +52,20 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
         })
         let vc = LoginViewController(viewModel: vm)
         navigationController.isNavigationBarHidden = true
-        presenter.makeRoot(vc: vc, nc: navigationController)
+        presenter.makeRoot(viewController: vc, navigationController: navigationController)
     }
 
 	private func connectSuccess(token: String) {
 		// TokenManager().setToken(token)
 		// TODO: @Leo how to get next vc?
 		let vc = UIViewController()
-		presenter.push(vc: vc, onto: navigationController, animated: true)
+		presenter.push(viewController: vc, onto: navigationController, animated: true)
 	}
 
 	private func connectFailure(error: Error) {
-		let viewController: UIViewController = navigationController
-		let errorPresenter = container.resolveUnwrapped(ErrorPresentingProtocol.self, argument: viewController)
-		errorPresenter.show(error: error)
+		let errorPresenter = container.resolveUnwrapped(ErrorPresentingProtocol.self)
+		let errorViewController = errorPresenter.errorViewController(error: error)
+		navigationController.present(errorViewController, animated: true) {
+		}
 	}
 }

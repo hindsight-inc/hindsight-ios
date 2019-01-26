@@ -6,7 +6,7 @@
 //  Copyright © 2018 hindsight-inc. All rights reserved.
 //
 
-// TODO: @Manish this test takes forever, possibly due to the same Moya+Rx issue?
+// TODO: @Manish this test cannot be finished as `request` never finishes
 /*
 import Foundation
 import Nimble

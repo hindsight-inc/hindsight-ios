@@ -21,21 +21,20 @@ class DependencyConfiguratorTest: QuickSpec {
 			}
 
 			context("when registering connect flow dependencies") {
-                DependencyConfigurator.registerConnectFlowDependencies(container: container)
+				DependencyConfigurator.registerConnectFlowDependencies(container: container, viewController: UIViewController())
 
 				it("should resolve connect API client") {
-					let client = container.resolveUnwrapped(ConnectApiClientProtocol.self)
+					let client = container.resolveUnwrapped(ConnectAPIClientProtocol.self)
 					expect(client).toNot(beNil())
 				}
 
 				it("should resolve error presenter") {
-					let presenter = container.resolveUnwrapped(ErrorPresentingProtocol.self, argument: UIViewController())
+					let presenter = container.resolveUnwrapped(ErrorPresentingProtocol.self)
 					expect(presenter).toNot(beNil())
 				}
 
     			it("should resolve SSO connector") {
-					let client = container.resolveUnwrapped(ConnectApiClientProtocol.self)
-					let connector = container.resolveUnwrapped(SSOConnectorProtocol.self, arguments: client, UIViewController())
+					let connector = container.resolveUnwrapped(SSOConnectorProtocol.self)
     				expect(connector).toNot(beNil())
     			}
 			}

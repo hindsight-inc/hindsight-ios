@@ -9,16 +9,16 @@
 import Foundation
 import RxSwift
 
-// TODO: @Leo rename to ConnnectAPIClientProtocol etc.?
-protocol ConnectApiClientProtocol {
+protocol ConnectAPIClientProtocol {
     func connect(token: String) -> Single<NetworkResult>
 }
 
-struct ConnectApiClient: ConnectApiClientProtocol {
+struct ConnectApiClient: ConnectAPIClientProtocol {
 
     let networkProvider: NetworkProviderProtocol
 
-	// TODO: @Leo rename to `connectObservable` etc.?
+	// TODO: @Leo rename to `connector`?
+	// (If connectSubscription or connectObservable or connectSignal... are not preferred)
     func connect(token: String) -> Single<NetworkResult> {
 		return networkProvider.connectFacebook(token: token)
 	}

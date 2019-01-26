@@ -11,7 +11,7 @@ import FacebookCore
 import FacebookLogin
 
 protocol SSOConnectorProtocol {
-	init(client: ConnectApiClientProtocol, viewController: UIViewController)
+	//init(client: ConnectApiClientProtocol, viewController: UIViewController)
 	func connect() -> Single<TokenProtocol>
 }
 
@@ -19,14 +19,14 @@ protocol SSOConnectorProtocol {
 /// we don't have anything else in mind, so it's in its simplest form.
 struct FacebookConnector: SSOConnectorProtocol {
 
-	private var viewController: UIViewController
-	private let client: ConnectApiClientProtocol
+	private var viewControllerClosure: () -> UIViewController
+	private let client: ConnectAPIClientProtocol
 	private let loginManager = LoginManager()
 	private let bag = DisposeBag()
 
-	init(client: ConnectApiClientProtocol, viewController: UIViewController) {
+	init(client: ConnectAPIClientProtocol, viewControllerClosure: @escaping () -> UIViewController) {
 		self.client = client
-		self.viewController = viewController
+		self.viewControllerClosure = viewControllerClosure
 
 		//FBSDKSettings.enableLoggingBehavior(.none)
 		//FBSDKSettings.loggingBehaviors.removeAll()
@@ -34,7 +34,8 @@ struct FacebookConnector: SSOConnectorProtocol {
 	}
 
 	func connect() -> Single<TokenProtocol> {
-		return Single<TokenProtocol>.create { single in
+		return Single<TokenProtocol>
+            .create { single in
 			if let token = AccessToken.current {
 				print("FB token exists", token.authenticationToken)
 				self.hindsightConnect(token: token, single: single)
@@ -46,7 +47,7 @@ struct FacebookConnector: SSOConnectorProtocol {
 				.userFriends,
 				.email
 			]
-			self.loginManager.logIn(readPermissions: permissions, viewController: self.viewController) { result in
+			self.loginManager.logIn(readPermissions: permissions, viewController: self.viewControllerClosure()) { result in
 				switch result {
 				case .success(_, _, let token):
     				self.hindsightConnect(token: token, single: single)
@@ -83,7 +84,7 @@ struct FacebookConnector: SSOConnectorProtocol {
 			}, onError: { error in
 				single(.error(error))
 			})
-			//.disposed(by: self.bag)	// TODO: @Leo how to hold `bag` here?
+			//.disposed(by: self.bag)	// TODO: @Manish how to hold `bag` here?
 			.disposed(by: globalBag)
 	}
 }

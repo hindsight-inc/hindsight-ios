@@ -24,20 +24,24 @@ struct DependencyConfigurator {
 
     /// Register dependencies for connect flow
     ///
-    /// - Parameter container: a swinject container
-    static func registerConnectFlowDependencies(container: Container) {
+    /// - Parameter container: a Swinject container
+    /// - Parameter viewController: a `UIViewController` that is required for some specific implemention(s),
+	/// i.e. `FacebookConnector`
+    static func registerConnectFlowDependencies(container: Container, viewController: UIViewController) {
 		/// Resolving top level dependencies
         let networkProvider = container.resolveUnwrapped(NetworkProviderProtocol.self)
 
 		/// Registering coordinator level dependencies
-		container.register(ConnectApiClientProtocol.self) { _ in
+		container.register(ConnectAPIClientProtocol.self) { _ in
 			ConnectApiClient(networkProvider: networkProvider)
 		}
-		container.register(ErrorPresentingProtocol.self) { _, viewController in
-			AlertErrorPresenter(viewController: viewController)
+		container.register(ErrorPresentingProtocol.self) { _ in
+			AlertErrorPresenter()
 		}
-		container.register(SSOConnectorProtocol.self) { _, client, viewController in
-			FacebookConnector(client: client, viewController: viewController)
+        let client = container.resolveUnwrapped(ConnectAPIClientProtocol.self)
+		container.register(SSOConnectorProtocol.self) { _ in
+			// TODO: @Leo advantage of using `() -> UIViewController` over `UIViewController`?
+			FacebookConnector(client: client, viewControllerClosure: { viewController })
 		}
     }
 
