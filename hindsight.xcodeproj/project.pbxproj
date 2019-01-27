@@ -48,6 +48,7 @@
 		B39EB41821E2E48F00C66817 /* DependencyConfiguratorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB41721E2E48F00C66817 /* DependencyConfiguratorTest.swift */; };
 		B39EB41C21E2F8FC00C66817 /* ConnectEndpointTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB41B21E2F8FC00C66817 /* ConnectEndpointTest.swift */; };
 		B3F810EA21FD025E00E84596 /* ListFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F810E921FD025E00E84596 /* ListFlowCoordinator.swift */; };
+		B3F810ED21FD4FC600E84596 /* ListFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3F810EC21FD4FC600E84596 /* ListFlow.storyboard */; };
 		FDDE27058DC0C1064C682C5F /* Pods_hindsight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28AC9CEAA1029095C1A8EE3D /* Pods_hindsight.framework */; };
 /* End PBXBuildFile section */
 
@@ -119,6 +120,7 @@
 		B39EB41721E2E48F00C66817 /* DependencyConfiguratorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyConfiguratorTest.swift; sourceTree = "<group>"; };
 		B39EB41B21E2F8FC00C66817 /* ConnectEndpointTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectEndpointTest.swift; sourceTree = "<group>"; };
 		B3F810E921FD025E00E84596 /* ListFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowCoordinator.swift; sourceTree = "<group>"; };
+		B3F810EC21FD4FC600E84596 /* ListFlow.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListFlow.storyboard; sourceTree = "<group>"; };
 		D4CAFEF15F10566409793390 /* Pods-hindsightTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hindsightTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hindsightTests/Pods-hindsightTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D7AB948399AB4587E52B8D53 /* Pods-hindsight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hindsight.release.xcconfig"; path = "Pods/Target Support Files/Pods-hindsight/Pods-hindsight.release.xcconfig"; sourceTree = "<group>"; };
 		DB48E6B288FD364AF7DE767C /* Pods_hindsightUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hindsightUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -453,6 +455,7 @@
 		B3F810E721FD01A300E84596 /* ListFlow */ = {
 			isa = PBXGroup;
 			children = (
+				B3F810EB21FD2F0300E84596 /* UI */,
 				B3F810E821FD024800E84596 /* Coordinator */,
 			);
 			path = ListFlow;
@@ -464,6 +467,14 @@
 				B3F810E921FD025E00E84596 /* ListFlowCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		B3F810EB21FD2F0300E84596 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				B3F810EC21FD4FC600E84596 /* ListFlow.storyboard */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		E42278061E85FFEA0695CF24 /* Pods */ = {
@@ -597,6 +608,7 @@
 			files = (
 				484C49F221767424005DAD02 /* Localizable.strings in Resources */,
 				13BA21E7217278FA00064C03 /* LaunchScreen.storyboard in Resources */,
+				B3F810ED21FD4FC600E84596 /* ListFlow.storyboard in Resources */,
 				13BA21E4217278FA00064C03 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

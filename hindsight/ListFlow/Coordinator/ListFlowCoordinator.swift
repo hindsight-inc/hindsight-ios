@@ -6,11 +6,15 @@
 //  Copyright © 2019 hindsight-inc. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol ListFlowCoordinatorProtocol {
 }
 
 struct ListFlowCoordinator: ListFlowCoordinatorProtocol {
     private(set) var presenter: Presenting
+}
+
+class ListViewController: UIViewController {
+
 }
