@@ -58,8 +58,10 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 	private func connectSuccess(token: String) {
 		// TokenManager().setToken(token)
 		// TODO: @Leo how to get next vc? do we get BaseFlowCoordinator here?
-		let vc = UIViewController()
-		presenter.push(viewController: vc, onto: navigationController, animated: true)
+		guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+			fatalError("Cannot obtain AppDelegate")
+		}
+		appDelegate.flow.pushList()
 	}
 
 	private func connectFailure(error: Error) {

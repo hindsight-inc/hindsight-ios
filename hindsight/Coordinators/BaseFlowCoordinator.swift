@@ -113,7 +113,11 @@ class BaseFlowCoordinator: PresenterProviding {
 
 	func pushList() {
 		//listFlow.push()
-		let viewController = UIViewController()
-		presenter.push(viewController: viewController, onto: navigationController, animated: true)
+		let storyboard = UIStoryboard(name: "ListFlow", bundle: nil)
+		guard let listViewController = storyboard
+			.instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else {
+			return
+		}
+		presenter.push(viewController: listViewController, onto: navigationController, animated: true)
 	}
 }
