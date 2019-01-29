@@ -77,7 +77,9 @@ class BaseFlowCoordinator: PresenterProviding {
         configureNavigationControllerForLaunch(navigationController: navigationController)
         configureWindow(window: mainWindow, rootNavigationController: navigationController)
         presenter.makeKeyAndVisible(window: mainWindow)
-        connectFlow.presentLogInAsRoot()
+		connectFlow.presentLogInAsRoot {
+			self.pushList()
+		}
         return true
     }
 

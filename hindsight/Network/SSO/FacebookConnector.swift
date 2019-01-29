@@ -19,14 +19,14 @@ protocol SSOConnectorProtocol {
 /// we don't have anything else in mind, so it's in its simplest form.
 struct FacebookConnector: SSOConnectorProtocol {
 
-	private var viewControllerClosure: () -> UIViewController
+	private var viewController: UIViewController
 	private let client: ConnectAPIClientProtocol
 	private let loginManager = LoginManager()
 	private let bag = DisposeBag()
 
-	init(client: ConnectAPIClientProtocol, viewControllerClosure: @escaping () -> UIViewController) {
+	init(client: ConnectAPIClientProtocol, viewController: UIViewController) {
 		self.client = client
-		self.viewControllerClosure = viewControllerClosure
+		self.viewController = viewController
 
 		//FBSDKSettings.enableLoggingBehavior(.none)
 		//FBSDKSettings.loggingBehaviors.removeAll()
@@ -47,7 +47,7 @@ struct FacebookConnector: SSOConnectorProtocol {
 				.userFriends,
 				.email
 			]
-			self.loginManager.logIn(readPermissions: permissions, viewController: self.viewControllerClosure()) { result in
+			self.loginManager.logIn(readPermissions: permissions, viewController: self.viewController) { result in
 				switch result {
 				case .success(_, _, let token):
     				self.hindsightConnect(token: token, single: single)
@@ -62,7 +62,7 @@ struct FacebookConnector: SSOConnectorProtocol {
 	}
 
 	private func hindsightConnect(token: AccessToken, single: @escaping (SingleEvent<TokenProtocol>) -> Void) {
-		client.connect(token: token.authenticationToken)
+		client.connector(token: token.authenticationToken)
 			.subscribe(onSuccess: { result in
 				switch result {
 				case .success(let data):

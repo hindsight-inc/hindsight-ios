@@ -33,15 +33,14 @@ struct DependencyConfigurator {
 
 		/// Registering coordinator level dependencies
 		container.register(ConnectAPIClientProtocol.self) { _ in
-			ConnectApiClient(networkProvider: networkProvider)
+			ConnectAPIClient(networkProvider: networkProvider)
 		}
 		container.register(ErrorPresentingProtocol.self) { _ in
 			AlertErrorPresenter()
 		}
         let client = container.resolveUnwrapped(ConnectAPIClientProtocol.self)
 		container.register(SSOConnectorProtocol.self) { _ in
-			// TODO: @Leo advantage of using `() -> UIViewController` over `UIViewController`?
-			FacebookConnector(client: client, viewControllerClosure: { viewController })
+			FacebookConnector(client: client, viewController: viewController)
 		}
     }
 

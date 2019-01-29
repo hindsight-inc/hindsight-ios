@@ -12,7 +12,7 @@ import Swinject
 import RxSwift
 
 protocol ConnectFlowCoordinatorProtocol {
-    func presentLogInAsRoot()
+	func presentLogInAsRoot(success: @escaping () -> Void)
 }
 
 struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProviding {
@@ -34,7 +34,7 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 
     private let bag = DisposeBag()
 
-    func presentLogInAsRoot() {
+    func presentLogInAsRoot(success: @escaping () -> Void) {
         let vm = LoginViewModel(facebookConnectClosure: {
 			let connector = self.container.resolveUnwrapped(SSOConnectorProtocol.self)
             connector.connect()
@@ -42,6 +42,7 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
                     onSuccess: { bearer in
                         print("ON success", bearer)
 						self.connectSuccess(token: bearer.token ?? "")
+						success()
                     },
                     onError: { error in
                         print("ON error \(error)")
@@ -57,11 +58,6 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 
 	private func connectSuccess(token: String) {
 		// TokenManager().setToken(token)
-		// TODO: @Leo how to get next vc? do we get BaseFlowCoordinator here?
-		guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-			fatalError("Cannot obtain AppDelegate")
-		}
-		appDelegate.flow.pushList()
 	}
 
 	private func connectFailure(error: Error) {
