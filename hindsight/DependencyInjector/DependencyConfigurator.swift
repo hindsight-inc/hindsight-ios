@@ -44,6 +44,16 @@ struct DependencyConfigurator {
 		}
     }
 
+	static func registerListFlowDependencies(container: Container) {
+		/// Resolving top level dependencies
+		let networkProvider = container.resolveUnwrapped(NetworkProviderProtocol.self)
+
+		/// Registering coordinator level dependencies
+		container.register(ListAPIClientProtocol.self) { _ in
+			ListAPIClient(networkProvider: networkProvider)
+		}
+	}
+
     /// Register dependencies for Detail flow
     ///
     /// - Parameter container: a swinject container

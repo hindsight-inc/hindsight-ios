@@ -250,8 +250,8 @@ struct MoyaNetworkProvider: NetworkProviderProtocol {
 	/// - Returns: Single<Result<Bool>>
 	func connectFacebook(token: String) -> Single<NetworkResult> {
 		return Single<NetworkResult>.create { single in
-			let provider = MoyaProvider<ConnectEndpoint>(plugins: [NetworkLoggerPlugin(verbose: true)])
-			//let provider = MoyaProvider<ConnectEndpoint>()
+			//let provider = MoyaProvider<ConnectEndpoint>(plugins: [NetworkLoggerPlugin(verbose: true)])
+			let provider = MoyaProvider<ConnectEndpoint>()
 			provider.request(.connect(accessToken: token)) { result in
 				switch result {
 				case let .success(response):
@@ -276,7 +276,25 @@ struct MoyaNetworkProvider: NetworkProviderProtocol {
 	///
 	/// - Returns: Single<Result<[TopicProtocol]>>
 	func topics() -> Single<NetworkResult> {
-		return Single<NetworkResult>.create { _ in
+		return Single<NetworkResult>.create { single in
+			//let provider = MoyaProvider<ConnectEndpoint>(plugins: [NetworkLoggerPlugin(verbose: true)])
+			let provider = MoyaProvider<TopicEndpoint>()
+			provider.request(.list(offset: 0, limit: 10)) { result in
+				switch result {
+				case let .success(response):
+					let code = response.statusCode
+					let data = response.data
+					if code == 200 {
+						single(.success(NetworkResult.success(data)))
+					} else {
+						let wsError = HindsightError.WebServiceError(
+							code: code, message: response.description, resolve: response.debugDescription)
+						single(.error(HindsightError.webServiceError(wsError: wsError)))
+					}
+				case let .failure(error):
+					single(.error(error))
+				}
+			}
 			return Disposables.create()
 		}
 	}

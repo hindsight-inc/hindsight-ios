@@ -6,6 +6,9 @@
   Copyright © 2018 hindsight-inc. All rights reserved.
 */
 
+"Non_UI.network.param.offset" = "offset";
+"Non_UI.network.param.limit" = "limit";
+
 "Non_UI.network.auth.register.api" = "/user/register";
 "Non_UI.network.auth.register.param.username" = "username";
 "Non_UI.network.auth.register.param.password" = "password";
@@ -23,5 +26,7 @@
 "Non_UI.network.auth.connect.param.method" = "method";
 "Non_UI.network.auth.connect.param.methods.facebook" = "facebook";
 "Non_UI.network.auth.connect.param.access_token" = "access_token";
+
+"Non_UI.network.topic.list.api" = "/topics";
 
 "Button.text.facebookLogin" = "Login With Facebook";

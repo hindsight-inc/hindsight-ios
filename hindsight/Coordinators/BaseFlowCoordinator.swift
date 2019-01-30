@@ -37,7 +37,7 @@ class BaseFlowCoordinator: PresenterProviding {
     }()
 
 	lazy var listFlow: ListFlowCoordinatorProtocol = {
-		ListFlowCoordinator(presenter: presenter)
+		ListFlowCoordinator(presenter: presenter, container: Container(parent: container))
 	}()
 
 	lazy var detailFlow: DetailFlowCoordinatorProtocol = {
@@ -114,12 +114,6 @@ class BaseFlowCoordinator: PresenterProviding {
     // MARK: - Push Topic List
 
 	func pushList() {
-		//listFlow.push()
-		let storyboard = UIStoryboard(name: "ListFlow", bundle: nil)
-		guard let listViewController = storyboard
-			.instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else {
-			return
-		}
-		presenter.push(viewController: listViewController, onto: navigationController, animated: true)
+		listFlow.push(from: navigationController)
 	}
 }
