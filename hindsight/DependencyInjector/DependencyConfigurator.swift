@@ -20,6 +20,9 @@ struct DependencyConfigurator {
             //NetworkProvider(sourceBehaviour: .stubbed)
             MoyaNetworkProvider()
         }
+		container.register(AuthProviderProtocol.self) { _ in
+			SimpleAuthProvider()
+		}
     }
 
     /// Register dependencies for connect flow

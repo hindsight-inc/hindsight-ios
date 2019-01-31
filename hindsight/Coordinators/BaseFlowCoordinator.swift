@@ -14,6 +14,8 @@ protocol BaseFlowCoorinatorProtocol {
 
 }
 
+/// TODO @Manish: `BaseFlowCoordinator` sounds a bit misleading, as `Base` usually suggests it's a base class.
+/// How about `RootFlowCoordinator` which indicates it hands root level navigation etc.?
 class BaseFlowCoordinator: PresenterProviding {
 
     // MARK: - Properties
