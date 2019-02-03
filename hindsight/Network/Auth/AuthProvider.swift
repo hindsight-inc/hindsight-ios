@@ -10,6 +10,7 @@ import Foundation
 
 protocol AuthProviderProtocol {
 	func save(token: String)
+	func token() -> String?
 	func isAuthenticated() -> Bool
 }
 
@@ -20,6 +21,10 @@ struct SimpleAuthProvider: AuthProviderProtocol {
 
 	func save(token: String) {
 		UserDefaults.standard.set(token, forKey: tokenKey)
+	}
+
+	func token() -> String? {
+		return UserDefaults.standard.string(forKey: tokenKey)
 	}
 
 	func isAuthenticated() -> Bool {

@@ -228,6 +228,8 @@ extension NetworkProvider {
 /// A Moya provider without RX
 struct MoyaNetworkProvider: NetworkProviderProtocol {
 
+	let authProvider: AuthProviderProtocol
+
 	func register(user: UserCredentialsProtocol) -> Single<NetworkResult> {
     	return Single<NetworkResult>.create { _ in
 			return Disposables.create()
@@ -277,8 +279,15 @@ struct MoyaNetworkProvider: NetworkProviderProtocol {
 	/// - Returns: Single<Result<[TopicProtocol]>>
 	func topics() -> Single<NetworkResult> {
 		return Single<NetworkResult>.create { single in
-			//let provider = MoyaProvider<ConnectEndpoint>(plugins: [NetworkLoggerPlugin(verbose: true)])
-			let provider = MoyaProvider<TopicEndpoint>()
+			guard
+				self.authProvider.isAuthenticated(),
+				let token = self.authProvider.token()
+			else {
+				single(.error(NSError()))
+    			return Disposables.create()
+			}
+			let authPlugin = AccessTokenPlugin(tokenClosure: token)
+			let provider = MoyaProvider<TopicEndpoint>(plugins: [authPlugin])
 			provider.request(.list(offset: 0, limit: 10)) { result in
 				switch result {
 				case let .success(response):

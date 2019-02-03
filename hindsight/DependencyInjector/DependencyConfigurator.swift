@@ -15,14 +15,16 @@ struct DependencyConfigurator {
     ///
     /// - Parameter container: a swinject container
     static func registerCoreDependencies(container: Container) {
-        container.register(NetworkProviderProtocol.self) { _ in
-			// TODO: @Manish There is an issue inside Moya's RX extension that causes `[weak base]` to be nil.
-            //NetworkProvider(sourceBehaviour: .stubbed)
-            MoyaNetworkProvider()
-        }
 		container.register(AuthProviderProtocol.self) { _ in
 			SimpleAuthProvider()
 		}
+
+        let authProvider = container.resolveUnwrapped(AuthProviderProtocol.self)
+        container.register(NetworkProviderProtocol.self) { _ in
+			// TODO: @Manish There is an issue inside Moya's RX extension that causes `[weak base]` to be nil.
+            //NetworkProvider(sourceBehaviour: .stubbed)
+			MoyaNetworkProvider(authProvider: authProvider)
+        }
     }
 
     /// Register dependencies for connect flow

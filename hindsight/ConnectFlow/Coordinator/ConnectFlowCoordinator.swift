@@ -57,7 +57,8 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
     }
 
 	private func connectSuccess(token: String) {
-		// TokenManager().setToken(token)
+		let authProvider = container.resolveUnwrapped(AuthProviderProtocol.self)
+		authProvider.save(token: token)
 	}
 
 	private func connectFailure(error: Error) {
