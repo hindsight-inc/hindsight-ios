@@ -40,12 +40,12 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
             connector.connect()
                 .subscribe(
                     onSuccess: { bearer in
-                        print("ON success", bearer)
+                        print("CONNECT on success", bearer)
 						self.connectSuccess(token: bearer.token ?? "")
 						success()
                     },
                     onError: { error in
-                        print("ON error \(error)")
+                        print("CONNECT on error \(error)")
 						self.connectFailure(error: error)
                     }
                 )

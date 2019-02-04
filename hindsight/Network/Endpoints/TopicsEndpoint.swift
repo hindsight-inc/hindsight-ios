@@ -12,6 +12,12 @@ enum TopicEndpoint {
 	case list(offset: Int, limit: Int)
 }
 
+extension TopicEndpoint: AccessTokenAuthorizable {
+	var authorizationType: AuthorizationType {
+		return .bearer
+	}
+}
+
 extension TopicEndpoint: TargetType {
 	var baseURL: URL {
 		guard let url = URL(string: "http://localhost:18182") else {

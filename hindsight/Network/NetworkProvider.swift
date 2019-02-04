@@ -64,7 +64,7 @@ enum HindsightError: Error {
     case connectError(error: ConnectError)
 }
 
-enum SourceBehaviour {
+enum SourceBehavior {
     case prod
     case local
     case mock
@@ -127,7 +127,7 @@ protocol NetworkProviderProtocol {
 
 struct NetworkProvider: NetworkProviderProtocol {
 
-    let sourceBehaviour: SourceBehaviour
+    let sourceBehaviour: SourceBehavior
 
     /// Register User
     ///
@@ -288,6 +288,7 @@ struct MoyaNetworkProvider: NetworkProviderProtocol {
 			}
 			let authPlugin = AccessTokenPlugin(tokenClosure: token)
 			let provider = MoyaProvider<TopicEndpoint>(plugins: [authPlugin])
+			//let provider = MoyaProvider<TopicEndpoint>(plugins: [authPlugin, NetworkLoggerPlugin(verbose: true)])
 			provider.request(.list(offset: 0, limit: 10)) { result in
 				switch result {
 				case let .success(response):
@@ -297,7 +298,7 @@ struct MoyaNetworkProvider: NetworkProviderProtocol {
 						single(.success(NetworkResult.success(data)))
 					} else {
 						let wsError = HindsightError.WebServiceError(
-							code: code, message: response.description, resolve: response.debugDescription)
+							code: code, message: response.description, resolve: String(data: data, encoding: .utf8) ?? "Decoding failed")
 						single(.error(HindsightError.webServiceError(wsError: wsError)))
 					}
 				case let .failure(error):

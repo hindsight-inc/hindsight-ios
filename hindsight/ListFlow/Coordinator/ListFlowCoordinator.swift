@@ -12,11 +12,27 @@ import RxSwift
 
 protocol ListFlowCoordinatorProtocol {
 	func push(from navigationController: UINavigationController)
+	func makeRoot(from navigationController: UINavigationController)
 }
 
-struct ListFlowCoordinator: ListFlowCoordinatorProtocol {
+final class ListFlowCoordinator: ListFlowCoordinatorProtocol {
     private(set) var presenter: Presenting
     private let container: Container
+
+	private lazy var listViewController: UIViewController = {
+		let client = container.resolveUnwrapped(ListAPIClientProtocol.self)
+		let viewModel = ListViewModel(client: client)
+
+		let storyboard = UIStoryboard(name: "ListFlow", bundle: nil)
+		guard let listViewController = storyboard
+			.instantiateViewController(withIdentifier: "ListViewController") as? ListViewController
+		else {
+			fatalError("ListFlowCoordinator: error instantiating ListViewController")
+		}
+		listViewController.viewModel = viewModel
+
+		return listViewController
+	}()
 
 	init(presenter: Presenting, container: Container) {
 		self.presenter = presenter
@@ -25,16 +41,11 @@ struct ListFlowCoordinator: ListFlowCoordinatorProtocol {
 	}
 
 	func push(from navigationController: UINavigationController) {
-		let client = container.resolveUnwrapped(ListAPIClientProtocol.self)
-		let viewModel = ListViewModel(client: client)
-
-		let storyboard = UIStoryboard(name: "ListFlow", bundle: nil)
-		guard let listViewController = storyboard
-			.instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else {
-				return
-		}
-		listViewController.viewModel = viewModel
 		presenter.push(viewController: listViewController, onto: navigationController, animated: true)
+	}
+
+	func makeRoot(from navigationController: UINavigationController) {
+        presenter.makeRoot(viewController: listViewController, navigationController: navigationController)
 	}
 }
 
@@ -73,9 +84,9 @@ struct ListViewModel: ListViewModelProtocol {
 	func setup() {
 		client.topicLister()
 			.subscribe(onSuccess: { result in
-				print("ON success", result)
+				print("LIST on success", result)
 			}, onError: { error in
-				print("ON error \(error)")
+				print("LIST on error \(error)")
 			})
 			.disposed(by: bag)
 	}

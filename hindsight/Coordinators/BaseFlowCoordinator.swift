@@ -79,8 +79,14 @@ class BaseFlowCoordinator: PresenterProviding {
         configureNavigationControllerForLaunch(navigationController: navigationController)
         configureWindow(window: mainWindow, rootNavigationController: navigationController)
         presenter.makeKeyAndVisible(window: mainWindow)
-		connectFlow.presentLogInAsRoot {
-			self.pushList()
+
+		let authProvider = container.resolveUnwrapped(AuthProviderProtocol.self)
+		if !authProvider.isAuthenticated() {
+    		connectFlow.presentLogInAsRoot {
+        		self.listFlow.push(from: self.navigationController)
+    		}
+		} else {
+			self.listFlow.makeRoot(from: navigationController)
 		}
         return true
     }
@@ -112,10 +118,4 @@ class BaseFlowCoordinator: PresenterProviding {
             [NSAttributedString.Key.foregroundColor: ColorName.hindsightWhite.color]
         // font - NSFontAttributeName: FontFamily.Interstate.regular.font(size: 16.0)
     }
-
-    // MARK: - Push Topic List
-
-	func pushList() {
-		listFlow.push(from: navigationController)
-	}
 }
