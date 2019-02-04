@@ -41,6 +41,8 @@
 		55A4589F219BB04100C5A042 /* LoginButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4589E219BB04100C5A042 /* LoginButtonViewModel.swift */; };
 		A5033A0392DCFBB5DC729979 /* Pods_hindsightUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB48E6B288FD364AF7DE767C /* Pods_hindsightUITests.framework */; };
 		B3651D9B22029BD10020473A /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3651D9A22029BD10020473A /* AuthProvider.swift */; };
+		B3651D9F2207F7320020473A /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3651D9E2207F7320020473A /* ListViewController.swift */; };
+		B3651DA12207F74D0020473A /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3651DA02207F74D0020473A /* ListViewModel.swift */; };
 		B39EB40B21DC5DC000C66817 /* ErrorPresenting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB40A21DC5DC000C66817 /* ErrorPresenting.swift */; };
 		B39EB40D21E1B29F00C66817 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB40C21E1B29F00C66817 /* NetworkResponse.swift */; };
 		B39EB40F21E1B33900C66817 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB40E21E1B33900C66817 /* Token.swift */; };
@@ -116,6 +118,8 @@
 		55A4589E219BB04100C5A042 /* LoginButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButtonViewModel.swift; sourceTree = "<group>"; };
 		AE6BA4D2A383FB28A637BCD4 /* Pods_hindsightTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hindsightTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3651D9A22029BD10020473A /* AuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
+		B3651D9E2207F7320020473A /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		B3651DA02207F74D0020473A /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		B39EB40A21DC5DC000C66817 /* ErrorPresenting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenting.swift; sourceTree = "<group>"; };
 		B39EB40C21E1B29F00C66817 /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
 		B39EB40E21E1B33900C66817 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -299,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				4899847E2190DCD300ADE46E /* UI */,
+				B3651D9C2207F7040020473A /* ViewModel */,
 				4899847B2190B3B300ADE46E /* Coordinator */,
 				489984782190B34D00ADE46E /* APIClient */,
 			);
@@ -325,7 +330,6 @@
 			isa = PBXGroup;
 			children = (
 				4899847F2190DCEF00ADE46E /* LoginViewController.swift */,
-				489984812191EDF000ADE46E /* LoginViewModel.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -440,6 +444,22 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		B3651D9C2207F7040020473A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				489984812191EDF000ADE46E /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B3651D9D2207F7140020473A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B3651DA02207F74D0020473A /* ListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		B39EB41421E1B81100C66817 /* SSO */ = {
 			isa = PBXGroup;
 			children = (
@@ -470,6 +490,7 @@
 			isa = PBXGroup;
 			children = (
 				B3F810EB21FD2F0300E84596 /* UI */,
+				B3651D9D2207F7140020473A /* ViewModel */,
 				B3F810E821FD024800E84596 /* Coordinator */,
 				B3F810EE21FFF37A00E84596 /* APIClient */,
 			);
@@ -488,6 +509,7 @@
 			isa = PBXGroup;
 			children = (
 				B3F810EC21FD4FC600E84596 /* ListFlow.storyboard */,
+				B3651D9E2207F7320020473A /* ListViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -827,6 +849,7 @@
 				B39EB41321E1B7D700C66817 /* FacebookConnector.swift in Sources */,
 				489984742190A65200ADE46E /* Container+UnwrappedResolved.swift in Sources */,
 				489984802190DCEF00ADE46E /* LoginViewController.swift in Sources */,
+				B3651D9F2207F7320020473A /* ListViewController.swift in Sources */,
 				134B794121739433009370E7 /* UserEndpoint.swift in Sources */,
 				484C49FB217682D2005DAD02 /* User.swift in Sources */,
 				489984822191EDF000ADE46E /* LoginViewModel.swift in Sources */,
@@ -837,6 +860,7 @@
 				13BA21DD217278F900064C03 /* AppDelegate.swift in Sources */,
 				489984712190A5D400ADE46E /* APIClient.swift in Sources */,
 				48998493219B6FA100ADE46E /* Strings.swift in Sources */,
+				B3651DA12207F74D0020473A /* ListViewModel.swift in Sources */,
 				B3F810EA21FD025E00E84596 /* ListFlowCoordinator.swift in Sources */,
 				55A4589F219BB04100C5A042 /* LoginButtonViewModel.swift in Sources */,
 				B39EB40D21E1B29F00C66817 /* NetworkResponse.swift in Sources */,

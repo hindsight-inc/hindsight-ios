@@ -6,9 +6,7 @@
 //  Copyright © 2019 hindsight-inc. All rights reserved.
 //
 
-import UIKit
 import Swinject
-import RxSwift
 
 protocol ListFlowCoordinatorProtocol {
 	func push(from navigationController: UINavigationController)
@@ -46,48 +44,5 @@ final class ListFlowCoordinator: ListFlowCoordinatorProtocol {
 
 	func makeRoot(from navigationController: UINavigationController) {
         presenter.makeRoot(viewController: listViewController, navigationController: navigationController)
-	}
-}
-
-class ListViewController: UIViewController {
-
-	@IBOutlet var tableView: UITableView!
-
-	var viewModel: ListViewModelProtocol!
-
-	/*
-	init(viewModel: ListViewModelProtocol) {
-		self.viewModel = viewModel
-		super.init(nibName: nil, bundle: nil)
-	}
-
-	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-    */
-
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		viewModel.setup()
-	}
-}
-
-protocol ListViewModelProtocol {
-	func setup()
-}
-
-struct ListViewModel: ListViewModelProtocol {
-
-	private(set) var client: ListAPIClientProtocol
-    private let bag = DisposeBag()
-
-	func setup() {
-		client.topicLister()
-			.subscribe(onSuccess: { result in
-				print("LIST on success", result)
-			}, onError: { error in
-				print("LIST on error \(error)")
-			})
-			.disposed(by: bag)
 	}
 }
