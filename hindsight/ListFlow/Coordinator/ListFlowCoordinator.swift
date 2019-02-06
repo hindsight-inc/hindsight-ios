@@ -27,6 +27,7 @@ final class ListFlowCoordinator: ListFlowCoordinatorProtocol {
 		else {
 			fatalError("ListFlowCoordinator: error instantiating ListViewController")
 		}
+        // TODO: @Manish we have to use property inject here for storyboard based view controllers, right?
 		listViewController.viewModel = viewModel
 
 		return listViewController

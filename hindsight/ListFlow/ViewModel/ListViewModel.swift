@@ -9,13 +9,20 @@
 import RxSwift
 
 protocol ListViewModelProtocol {
+    var topics: Variable<[TopicResponse]> { get }
 	func setup()
 }
 
 struct ListViewModel: ListViewModelProtocol {
 
+    var topics = Variable<[TopicResponse]>([TopicResponse]())
+
 	private(set) var client: ListAPIClientProtocol
 	private let bag = DisposeBag()
+
+    init(client: ListAPIClientProtocol) {
+        self.client = client
+    }
 
 	func setup() {
 		client.topicLister()
@@ -26,9 +33,9 @@ struct ListViewModel: ListViewModelProtocol {
 						print("LIST invalid response data")
 						return
 					}
-					print("LIST on success", result)
 					do {
 						let topics = try JSONDecoder().decode([TopicResponse].self, from: data)
+                        self.topics.value = topics
 						print("LIST topics", topics)
 					} catch let error {
 						print("LIST decoding error", error)
@@ -41,4 +48,13 @@ struct ListViewModel: ListViewModelProtocol {
 			})
 			.disposed(by: bag)
 	}
+
+    /*
+    private func showFailure(error: Error) {
+        let errorPresenter = container.resolveUnwrapped(ErrorPresentingProtocol.self)
+        let errorViewController = errorPresenter.errorViewController(error: error)
+        navigationController.present(errorViewController, animated: true) {
+        }
+    }
+    */
 }

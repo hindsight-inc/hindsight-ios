@@ -7,26 +7,50 @@
 //
 
 import UIKit
+import RxSwift
+
+class ListTableViewCell: UITableViewCell {
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var contentLabel: UILabel!
+    @IBOutlet var authorLabel: UILabel!
+    @IBOutlet var dateLabel: UILabel!
+}
 
 class ListViewController: UIViewController {
 
 	@IBOutlet var tableView: UITableView!
 
 	var viewModel: ListViewModelProtocol!
-
-	/*
-	init(viewModel: ListViewModelProtocol) {
-	self.viewModel = viewModel
-	super.init(nibName: nil, bundle: nil)
-	}
-
-	required init?(coder aDecoder: NSCoder) {
-	fatalError("init(coder:) has not been implemented")
-	}
-	*/
+    private let disposeBag = DisposeBag()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		viewModel.setup()
-	}
+
+        viewModel.topics.asObservable()
+            .bind(to: tableView.rx.items(
+                cellIdentifier: "ListTopicCell", cellType: ListTableViewCell.self)) { (_, topic, cell) in
+
+                cell.titleLabel.text = topic.title
+                cell.contentLabel.text = topic.content
+                cell.authorLabel.text = topic.author?.username
+                cell.dateLabel.text = topic.milestone_deadline
+            }
+            .disposed(by: disposeBag)
+
+        tableView.rx
+            .modelSelected(TopicResponse.self)
+            .subscribe(onNext: { topic in
+                print("LIST selected", topic)
+            })
+            .disposed(by: disposeBag)
+
+        tableView.rx
+            .itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                print("LIST tapped", indexPath.row)
+                self?.tableView.deselectRow(at: indexPath, animated: true)
+            })
+            .disposed(by: disposeBag)
+    }
 }
