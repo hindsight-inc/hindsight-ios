@@ -43,6 +43,7 @@
 		B3651D9B22029BD10020473A /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3651D9A22029BD10020473A /* AuthProvider.swift */; };
 		B3651D9F2207F7320020473A /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3651D9E2207F7320020473A /* ListViewController.swift */; };
 		B3651DA12207F74D0020473A /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3651DA02207F74D0020473A /* ListViewModel.swift */; };
+		B3651DA4220C029A0020473A /* DetailFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3651DA3220C029A0020473A /* DetailFlow.storyboard */; };
 		B39EB40B21DC5DC000C66817 /* ErrorPresenting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB40A21DC5DC000C66817 /* ErrorPresenting.swift */; };
 		B39EB40D21E1B29F00C66817 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB40C21E1B29F00C66817 /* NetworkResponse.swift */; };
 		B39EB40F21E1B33900C66817 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB40E21E1B33900C66817 /* Token.swift */; };
@@ -120,6 +121,7 @@
 		B3651D9A22029BD10020473A /* AuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
 		B3651D9E2207F7320020473A /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		B3651DA02207F74D0020473A /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		B3651DA3220C029A0020473A /* DetailFlow.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = DetailFlow.storyboard; path = hindsight/ListFlow/ViewModel/DetailFlow.storyboard; sourceTree = SOURCE_ROOT; };
 		B39EB40A21DC5DC000C66817 /* ErrorPresenting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenting.swift; sourceTree = "<group>"; };
 		B39EB40C21E1B29F00C66817 /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
 		B39EB40E21E1B33900C66817 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -347,7 +349,7 @@
 		489984842192258400ADE46E /* DetailsFlow */ = {
 			isa = PBXGroup;
 			children = (
-				4899848A219225C200ADE46E /* UI */,
+				B3651DA2220C027D0020473A /* UI */,
 				48998489219225BA00ADE46E /* Coordinator */,
 				48998488219225B300ADE46E /* ApiClient */,
 			);
@@ -389,13 +391,6 @@
 				4899848B219225F400ADE46E /* DetailFlowCoordinator.swift */,
 			);
 			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		4899848A219225C200ADE46E /* UI */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UI;
 			sourceTree = "<group>";
 		};
 		4899848F219B6FA100ADE46E /* Generated */ = {
@@ -458,6 +453,14 @@
 				B3651DA02207F74D0020473A /* ListViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B3651DA2220C027D0020473A /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				B3651DA3220C029A0020473A /* DetailFlow.storyboard */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		B39EB41421E1B81100C66817 /* SSO */ = {
@@ -654,6 +657,7 @@
 				484C49F221767424005DAD02 /* Localizable.strings in Resources */,
 				13BA21E7217278FA00064C03 /* LaunchScreen.storyboard in Resources */,
 				B3F810ED21FD4FC600E84596 /* ListFlow.storyboard in Resources */,
+				B3651DA4220C029A0020473A /* DetailFlow.storyboard in Resources */,
 				13BA21E4217278FA00064C03 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
