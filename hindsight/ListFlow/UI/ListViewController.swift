@@ -42,6 +42,7 @@ class ListViewController: UIViewController {
             .modelSelected(TopicResponse.self)
             .subscribe(onNext: { topic in
                 print("LIST selected", topic)
+				self.viewModel.nextClosure(topic)
             })
             .disposed(by: disposeBag)
 

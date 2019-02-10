@@ -39,7 +39,9 @@ class BaseFlowCoordinator: PresenterProviding {
     }()
 
 	lazy var listFlow: ListFlowCoordinatorProtocol = {
-		ListFlowCoordinator(presenter: presenter, container: Container(parent: container))
+		ListFlowCoordinator(presenter: presenter, container: Container(parent: container), next: { topic in
+			self.detailFlow.push(from: self.navigationController, topic: topic)
+		})
 	}()
 
 	lazy var detailFlow: DetailFlowCoordinatorProtocol = {

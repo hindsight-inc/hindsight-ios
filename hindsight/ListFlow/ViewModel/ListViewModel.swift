@@ -10,18 +10,22 @@ import RxSwift
 
 protocol ListViewModelProtocol {
     var topics: Variable<[TopicResponse]> { get }
+	var nextClosure: TopicClosure { get }
+
 	func setup()
 }
 
 struct ListViewModel: ListViewModelProtocol {
 
     var topics = Variable<[TopicResponse]>([TopicResponse]())
+	var nextClosure: TopicClosure
 
 	private(set) var client: ListAPIClientProtocol
 	private let bag = DisposeBag()
 
-    init(client: ListAPIClientProtocol) {
+	init(client: ListAPIClientProtocol, next closure: @escaping TopicClosure) {
         self.client = client
+		self.nextClosure = closure
     }
 
 	func setup() {
@@ -47,6 +51,13 @@ struct ListViewModel: ListViewModelProtocol {
 				print("LIST on error \(error)")
 			})
 			.disposed(by: bag)
+	}
+
+	func detailHandler() -> Single<TopicResponse> {
+		return Single<TopicResponse>.create { single in
+			single(.error(NSError()))
+			return Disposables.create()
+		}
 	}
 
     /*

@@ -84,8 +84,6 @@ enum SourceBehavior {
     }
 }
 
-typealias NetworkResult = Result<Any?>
-
 /// Describe Network operations
 protocol NetworkProviderProtocol {
 

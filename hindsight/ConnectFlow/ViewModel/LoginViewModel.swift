@@ -9,8 +9,6 @@
 import Foundation
 import Swinject
 
-typealias VoidClosure = () -> Void
-
 protocol LoginViewModelProtocol {
     func connectFacebook()
 }

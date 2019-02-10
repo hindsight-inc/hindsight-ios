@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="PF6-3d-Nh5">
             <objects>
-                <viewController storyboardIdentifier="DetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mpD-oQ-vAD" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mpD-oQ-vAD" customClass="DetailViewController" customModule="hindsight" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rot-jh-6AK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -179,9 +179,6 @@ Here is why.</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qvy-yc-Jqf"/>
                     </view>
-                    <connections>
-                        <outlet property="tableView" destination="ZBj-ga-Hsh" id="y1T-WT-EHq"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UiT-CU-Pml" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

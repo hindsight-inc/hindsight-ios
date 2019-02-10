@@ -43,7 +43,10 @@
 		B3651D9B22029BD10020473A /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3651D9A22029BD10020473A /* AuthProvider.swift */; };
 		B3651D9F2207F7320020473A /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3651D9E2207F7320020473A /* ListViewController.swift */; };
 		B3651DA12207F74D0020473A /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3651DA02207F74D0020473A /* ListViewModel.swift */; };
-		B3651DA4220C029A0020473A /* DetailFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3651DA3220C029A0020473A /* DetailFlow.storyboard */; };
+		B3651DA7220FBC690020473A /* DetailFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3651DA6220FBC690020473A /* DetailFlow.storyboard */; };
+		B3651DAD220FBCFE0020473A /* DetailAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3651DAC220FBCFE0020473A /* DetailAPIClient.swift */; };
+		B36E616A220FC6BB00CEA180 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36E6169220FC6BB00CEA180 /* DetailViewController.swift */; };
+		B36E616D220FD59E00CEA180 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36E616C220FD59E00CEA180 /* Type.swift */; };
 		B39EB40B21DC5DC000C66817 /* ErrorPresenting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB40A21DC5DC000C66817 /* ErrorPresenting.swift */; };
 		B39EB40D21E1B29F00C66817 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB40C21E1B29F00C66817 /* NetworkResponse.swift */; };
 		B39EB40F21E1B33900C66817 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB40E21E1B33900C66817 /* Token.swift */; };
@@ -121,7 +124,10 @@
 		B3651D9A22029BD10020473A /* AuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
 		B3651D9E2207F7320020473A /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		B3651DA02207F74D0020473A /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
-		B3651DA3220C029A0020473A /* DetailFlow.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = DetailFlow.storyboard; path = hindsight/ListFlow/ViewModel/DetailFlow.storyboard; sourceTree = SOURCE_ROOT; };
+		B3651DA6220FBC690020473A /* DetailFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailFlow.storyboard; sourceTree = "<group>"; };
+		B3651DAC220FBCFE0020473A /* DetailAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailAPIClient.swift; sourceTree = "<group>"; };
+		B36E6169220FC6BB00CEA180 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		B36E616C220FD59E00CEA180 /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		B39EB40A21DC5DC000C66817 /* ErrorPresenting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenting.swift; sourceTree = "<group>"; };
 		B39EB40C21E1B29F00C66817 /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
 		B39EB40E21E1B33900C66817 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -205,10 +211,11 @@
 			isa = PBXGroup;
 			children = (
 				FA65B5E021C9A2B900FCBCA5 /* hindsight.entitlements */,
+				B36E616B220FD54500CEA180 /* Common */,
 				489984832192257800ADE46E /* CreateFlow */,
 				489984772190B34400ADE46E /* ConnectFlow */,
 				B3F810E721FD01A300E84596 /* ListFlow */,
-				489984842192258400ADE46E /* DetailsFlow */,
+				489984842192258400ADE46E /* DetailFlow */,
 				489984722190A60C00ADE46E /* DependencyInjector */,
 				4899846F2190A56A00ADE46E /* APIClient */,
 				4899846A2190A3A700ADE46E /* Coordinators */,
@@ -346,14 +353,14 @@
 			path = CreateFlow;
 			sourceTree = "<group>";
 		};
-		489984842192258400ADE46E /* DetailsFlow */ = {
+		489984842192258400ADE46E /* DetailFlow */ = {
 			isa = PBXGroup;
 			children = (
-				B3651DA2220C027D0020473A /* UI */,
+				B3651DA5220FBC690020473A /* UI */,
 				48998489219225BA00ADE46E /* Coordinator */,
-				48998488219225B300ADE46E /* ApiClient */,
+				B3651DAB220FBCFE0020473A /* APIClient */,
 			);
-			path = DetailsFlow;
+			path = DetailFlow;
 			sourceTree = "<group>";
 		};
 		489984852192259300ADE46E /* UI */ = {
@@ -372,13 +379,6 @@
 			sourceTree = "<group>";
 		};
 		48998487219225A900ADE46E /* ApiClient */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ApiClient;
-			sourceTree = "<group>";
-		};
-		48998488219225B300ADE46E /* ApiClient */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -455,12 +455,29 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		B3651DA2220C027D0020473A /* UI */ = {
+		B3651DA5220FBC690020473A /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				B3651DA3220C029A0020473A /* DetailFlow.storyboard */,
+				B3651DA6220FBC690020473A /* DetailFlow.storyboard */,
+				B36E6169220FC6BB00CEA180 /* DetailViewController.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		B3651DAB220FBCFE0020473A /* APIClient */ = {
+			isa = PBXGroup;
+			children = (
+				B3651DAC220FBCFE0020473A /* DetailAPIClient.swift */,
+			);
+			path = APIClient;
+			sourceTree = "<group>";
+		};
+		B36E616B220FD54500CEA180 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B36E616C220FD59E00CEA180 /* Type.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		B39EB41421E1B81100C66817 /* SSO */ = {
@@ -657,7 +674,7 @@
 				484C49F221767424005DAD02 /* Localizable.strings in Resources */,
 				13BA21E7217278FA00064C03 /* LaunchScreen.storyboard in Resources */,
 				B3F810ED21FD4FC600E84596 /* ListFlow.storyboard in Resources */,
-				B3651DA4220C029A0020473A /* DetailFlow.storyboard in Resources */,
+				B3651DA7220FBC690020473A /* DetailFlow.storyboard in Resources */,
 				13BA21E4217278FA00064C03 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -855,10 +872,12 @@
 				489984802190DCEF00ADE46E /* LoginViewController.swift in Sources */,
 				B3651D9F2207F7320020473A /* ListViewController.swift in Sources */,
 				134B794121739433009370E7 /* UserEndpoint.swift in Sources */,
+				B3651DAD220FBCFE0020473A /* DetailAPIClient.swift in Sources */,
 				484C49FB217682D2005DAD02 /* User.swift in Sources */,
 				489984822191EDF000ADE46E /* LoginViewModel.swift in Sources */,
 				B39EB40B21DC5DC000C66817 /* ErrorPresenting.swift in Sources */,
 				55A4589D219BB01600C5A042 /* LoginButtonState.swift in Sources */,
+				B36E616A220FC6BB00CEA180 /* DetailViewController.swift in Sources */,
 				B3651D9B22029BD10020473A /* AuthProvider.swift in Sources */,
 				B39EB40F21E1B33900C66817 /* Token.swift in Sources */,
 				13BA21DD217278F900064C03 /* AppDelegate.swift in Sources */,
@@ -873,6 +892,7 @@
 				4899846C2190A3CB00ADE46E /* BaseFlowCoordinator.swift in Sources */,
 				55A4589A219A74F500C5A042 /* LoginButton.swift in Sources */,
 				B3F810F021FFF9BE00E84596 /* ListAPIClient.swift in Sources */,
+				B36E616D220FD59E00CEA180 /* Type.swift in Sources */,
 				4899848C219225F400ADE46E /* DetailFlowCoordinator.swift in Sources */,
 				4899846E2190A45B00ADE46E /* Presenting.swift in Sources */,
 				484C4A012177B7C1005DAD02 /* UserCredentialsProtocol.swift in Sources */,
