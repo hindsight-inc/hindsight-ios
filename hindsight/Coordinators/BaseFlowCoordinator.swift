@@ -14,6 +14,8 @@ protocol BaseFlowCoorinatorProtocol {
 
 }
 
+/// TODO @Manish: `BaseFlowCoordinator` sounds a bit misleading, as `Base` usually suggests it's a base class.
+/// How about `RootFlowCoordinator` which indicates it hands root level navigation etc.?
 class BaseFlowCoordinator: PresenterProviding {
 
     // MARK: - Properties
@@ -36,11 +38,15 @@ class BaseFlowCoordinator: PresenterProviding {
                                navigationController: navigationController)
     }()
 
-    lazy var detailFlow: DetailFlowCoordinatorProtocol = {
-        DetailFlowCoordinator(presenter: presenter,
-                               container: Container(parent: container),
-                               navigationController: navigationController)
-    }()
+	lazy var listFlow: ListFlowCoordinatorProtocol = {
+		ListFlowCoordinator(presenter: presenter, container: Container(parent: container))
+	}()
+
+	lazy var detailFlow: DetailFlowCoordinatorProtocol = {
+		DetailFlowCoordinator(presenter: presenter,
+							  container: Container(parent: container),
+							  navigationController: navigationController)
+	}()
 
 //    lazy var createFlow: ConnectFlowCoordinatorProtocol = {
 //        ConnectFlowCoordinator(presenter: presenter,
@@ -70,10 +76,18 @@ class BaseFlowCoordinator: PresenterProviding {
     ///            directives prescribed in the `launchOptions` dictionary.
     func presentRootInterface(application: UIApplication,
                               withOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        configureNavigationControllerForLaunch(nc: navigationController)
+        configureNavigationControllerForLaunch(navigationController: navigationController)
         configureWindow(window: mainWindow, rootNavigationController: navigationController)
         presenter.makeKeyAndVisible(window: mainWindow)
-        connectFlow.presentLogInAsRoot()
+
+		let authProvider = container.resolveUnwrapped(AuthProviderProtocol.self)
+		if !authProvider.isAuthenticated() {
+    		connectFlow.presentLogInAsRoot {
+        		self.listFlow.push(from: self.navigationController)
+    		}
+		} else {
+			self.listFlow.makeRoot(from: navigationController)
+		}
         return true
     }
 
@@ -82,7 +96,7 @@ class BaseFlowCoordinator: PresenterProviding {
     /// Configure a `UINavigationController` to present a `LaunchViewController` as it's top view controller
     ///
     /// - Parameter nc: `UINavigationController` to configure
-    func configureNavigationControllerForLaunch(nc: UINavigationController) {
+    func configureNavigationControllerForLaunch(navigationController: UINavigationController) {
         // configure navigationBar here
     }
 

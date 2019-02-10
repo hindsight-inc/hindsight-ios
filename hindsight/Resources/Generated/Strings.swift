@@ -65,6 +65,18 @@ internal enum Constants {
           }
         }
       }
+      internal enum Param {
+        /// limit
+        internal static let limit = Constants.tr("Localizable", "Non_UI.network.param.limit")
+        /// offset
+        internal static let offset = Constants.tr("Localizable", "Non_UI.network.param.offset")
+      }
+      internal enum Topic {
+        internal enum List {
+          /// /topics
+          internal static let api = Constants.tr("Localizable", "Non_UI.network.topic.list.api")
+        }
+      }
       internal enum User {
         internal enum Login {
           /// register

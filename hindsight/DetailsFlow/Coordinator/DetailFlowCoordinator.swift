@@ -17,7 +17,7 @@ protocol DetailFlowCoordinatorProtocol {
 
 struct DetailFlowCoordinator: DetailFlowCoordinatorProtocol, PresenterProviding {
 
-    internal let presenter: Presenting
+    let presenter: Presenting
 
     private let container: Container
 

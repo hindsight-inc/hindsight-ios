@@ -22,6 +22,7 @@ internal enum Asset {
   internal static let hindsightLoginBackground = ImageAsset(name: "hindsightLoginBackground")
   internal static let hindsightLogo = ImageAsset(name: "hindsightLogo")
   internal static let hindsightNavigationBarLogo = ImageAsset(name: "hindsightNavigationBarLogo")
+  internal static let placeholder = ImageAsset(name: "placeholder")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

@@ -12,7 +12,7 @@ import Swinject
 import RxSwift
 
 protocol ConnectFlowCoordinatorProtocol {
-    func presentLogInAsRoot()
+	func presentLogInAsRoot(success: @escaping () -> Void)
 }
 
 struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProviding {
@@ -34,17 +34,18 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
 
     private let bag = DisposeBag()
 
-    func presentLogInAsRoot() {
+    func presentLogInAsRoot(success: @escaping () -> Void) {
         let vm = LoginViewModel(facebookConnectClosure: {
 			let connector = self.container.resolveUnwrapped(SSOConnectorProtocol.self)
             connector.connect()
                 .subscribe(
                     onSuccess: { bearer in
-                        print("ON success", bearer)
+                        print("CONNECT on success", bearer)
 						self.connectSuccess(token: bearer.token ?? "")
+						success()
                     },
                     onError: { error in
-                        print("ON error \(error)")
+                        print("CONNECT on error \(error)")
 						self.connectFailure(error: error)
                     }
                 )
@@ -56,10 +57,8 @@ struct ConnectFlowCoordinator: ConnectFlowCoordinatorProtocol, PresenterProvidin
     }
 
 	private func connectSuccess(token: String) {
-		// TokenManager().setToken(token)
-		// TODO: @Leo how to get next vc?
-		let vc = UIViewController()
-		presenter.push(viewController: vc, onto: navigationController, animated: true)
+		let authProvider = container.resolveUnwrapped(AuthProviderProtocol.self)
+		authProvider.save(token: token)
 	}
 
 	private func connectFailure(error: Error) {

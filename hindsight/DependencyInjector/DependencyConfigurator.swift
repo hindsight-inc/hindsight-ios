@@ -15,10 +15,15 @@ struct DependencyConfigurator {
     ///
     /// - Parameter container: a swinject container
     static func registerCoreDependencies(container: Container) {
+		container.register(AuthProviderProtocol.self) { _ in
+			SimpleAuthProvider()
+		}
+
+        let authProvider = container.resolveUnwrapped(AuthProviderProtocol.self)
         container.register(NetworkProviderProtocol.self) { _ in
 			// TODO: @Manish There is an issue inside Moya's RX extension that causes `[weak base]` to be nil.
             //NetworkProvider(sourceBehaviour: .stubbed)
-            MoyaNetworkProvider()
+			MoyaNetworkProvider(authProvider: authProvider)
         }
     }
 
@@ -33,17 +38,26 @@ struct DependencyConfigurator {
 
 		/// Registering coordinator level dependencies
 		container.register(ConnectAPIClientProtocol.self) { _ in
-			ConnectApiClient(networkProvider: networkProvider)
+			ConnectAPIClient(networkProvider: networkProvider)
 		}
 		container.register(ErrorPresentingProtocol.self) { _ in
 			AlertErrorPresenter()
 		}
         let client = container.resolveUnwrapped(ConnectAPIClientProtocol.self)
 		container.register(SSOConnectorProtocol.self) { _ in
-			// TODO: @Leo advantage of using `() -> UIViewController` over `UIViewController`?
-			FacebookConnector(client: client, viewControllerClosure: { viewController })
+			FacebookConnector(client: client, viewController: viewController)
 		}
     }
+
+	static func registerListFlowDependencies(container: Container) {
+		/// Resolving top level dependencies
+		let networkProvider = container.resolveUnwrapped(NetworkProviderProtocol.self)
+
+		/// Registering coordinator level dependencies
+		container.register(ListAPIClientProtocol.self) { _ in
+			ListAPIClient(networkProvider: networkProvider)
+		}
+	}
 
     /// Register dependencies for Detail flow
     ///
