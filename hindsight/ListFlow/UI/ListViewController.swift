@@ -18,6 +18,7 @@ class ListTableViewCell: UITableViewCell {
 
 class ListViewController: UIViewController {
 
+	// TODO: @Manish reconstruct UI programmatically if you want
 	@IBOutlet var tableView: UITableView!
 
 	var viewModel: ListViewModelProtocol!

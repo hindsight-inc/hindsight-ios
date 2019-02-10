@@ -46,3 +46,9 @@ struct TopicResponse: Decodable {
 	var milestone_deadline: String?		// Example: "2018-12-02T17:04:06-05:00"
 	var opinions: [OpinionResponse]?
 }
+
+struct CommentResponse: Decodable {
+	var id: Int?
+	var author: UserResponse?
+	var content: String?
+}
