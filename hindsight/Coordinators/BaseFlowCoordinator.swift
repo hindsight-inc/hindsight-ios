@@ -84,6 +84,7 @@ class BaseFlowCoordinator: PresenterProviding {
 
 		let authProvider = container.resolveUnwrapped(AuthProviderProtocol.self)
 		if !authProvider.isAuthenticated() {
+			// TODO: @Manish why not inject `successClosure` into `connectFlow` in initializer?
     		connectFlow.presentLogInAsRoot {
         		self.listFlow.push(from: self.navigationController)
     		}

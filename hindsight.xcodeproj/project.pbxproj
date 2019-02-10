@@ -54,6 +54,7 @@
 		B39EB41621E2D5D300C66817 /* Container+UnwrappedResolvedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB41521E2D5D300C66817 /* Container+UnwrappedResolvedTest.swift */; };
 		B39EB41821E2E48F00C66817 /* DependencyConfiguratorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB41721E2E48F00C66817 /* DependencyConfiguratorTest.swift */; };
 		B39EB41C21E2F8FC00C66817 /* ConnectEndpointTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39EB41B21E2F8FC00C66817 /* ConnectEndpointTest.swift */; };
+		B3D246AD220FDFE60083A76D /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D246AC220FDFE60083A76D /* DetailViewModel.swift */; };
 		B3F810EA21FD025E00E84596 /* ListFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F810E921FD025E00E84596 /* ListFlowCoordinator.swift */; };
 		B3F810ED21FD4FC600E84596 /* ListFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3F810EC21FD4FC600E84596 /* ListFlow.storyboard */; };
 		B3F810F021FFF9BE00E84596 /* ListAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F810EF21FFF9BE00E84596 /* ListAPIClient.swift */; };
@@ -135,6 +136,7 @@
 		B39EB41521E2D5D300C66817 /* Container+UnwrappedResolvedTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Container+UnwrappedResolvedTest.swift"; sourceTree = "<group>"; };
 		B39EB41721E2E48F00C66817 /* DependencyConfiguratorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyConfiguratorTest.swift; sourceTree = "<group>"; };
 		B39EB41B21E2F8FC00C66817 /* ConnectEndpointTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectEndpointTest.swift; sourceTree = "<group>"; };
+		B3D246AC220FDFE60083A76D /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		B3F810E921FD025E00E84596 /* ListFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowCoordinator.swift; sourceTree = "<group>"; };
 		B3F810EC21FD4FC600E84596 /* ListFlow.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListFlow.storyboard; sourceTree = "<group>"; };
 		B3F810EF21FFF9BE00E84596 /* ListAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAPIClient.swift; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				B3651DA5220FBC690020473A /* UI */,
+				B3D246AB220FDFD50083A76D /* ViewModel */,
 				48998489219225BA00ADE46E /* Coordinator */,
 				B3651DAB220FBCFE0020473A /* APIClient */,
 			);
@@ -504,6 +507,14 @@
 				B39EB41B21E2F8FC00C66817 /* ConnectEndpointTest.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		B3D246AB220FDFD50083A76D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B3D246AC220FDFE60083A76D /* DetailViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		B3F810E721FD01A300E84596 /* ListFlow */ = {
@@ -872,6 +883,7 @@
 				489984802190DCEF00ADE46E /* LoginViewController.swift in Sources */,
 				B3651D9F2207F7320020473A /* ListViewController.swift in Sources */,
 				134B794121739433009370E7 /* UserEndpoint.swift in Sources */,
+				B3D246AD220FDFE60083A76D /* DetailViewModel.swift in Sources */,
 				B3651DAD220FBCFE0020473A /* DetailAPIClient.swift in Sources */,
 				484C49FB217682D2005DAD02 /* User.swift in Sources */,
 				489984822191EDF000ADE46E /* LoginViewModel.swift in Sources */,
