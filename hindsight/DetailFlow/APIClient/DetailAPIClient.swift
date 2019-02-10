@@ -7,3 +7,19 @@
 //
 
 import Foundation
+import RxSwift
+
+// TODO: fetch details with comments
+protocol DetailAPIClientProtocol {
+	func topicDetail() -> Single<NetworkResult>
+}
+
+struct DetailAPIClient: DetailAPIClientProtocol {
+
+	let networkProvider: NetworkProviderProtocol
+
+	/// List all topics
+	func topicDetail() -> Single<NetworkResult> {
+		return networkProvider.topicDetail(topic: TopicResponse())
+	}
+}

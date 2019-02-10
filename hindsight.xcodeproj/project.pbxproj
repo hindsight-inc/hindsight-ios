@@ -58,7 +58,6 @@
 		B3F810EA21FD025E00E84596 /* ListFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F810E921FD025E00E84596 /* ListFlowCoordinator.swift */; };
 		B3F810ED21FD4FC600E84596 /* ListFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3F810EC21FD4FC600E84596 /* ListFlow.storyboard */; };
 		B3F810F021FFF9BE00E84596 /* ListAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F810EF21FFF9BE00E84596 /* ListAPIClient.swift */; };
-		B3F810F121FFF9BE00E84596 /* ListAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F810EF21FFF9BE00E84596 /* ListAPIClient.swift */; };
 		FDDE27058DC0C1064C682C5F /* Pods_hindsight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28AC9CEAA1029095C1A8EE3D /* Pods_hindsight.framework */; };
 /* End PBXBuildFile section */
 
@@ -926,7 +925,6 @@
 				B39EB41C21E2F8FC00C66817 /* ConnectEndpointTest.swift in Sources */,
 				B39EB41821E2E48F00C66817 /* DependencyConfiguratorTest.swift in Sources */,
 				13BA21F2217278FA00064C03 /* hindsightTests.swift in Sources */,
-				B3F810F121FFF9BE00E84596 /* ListAPIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

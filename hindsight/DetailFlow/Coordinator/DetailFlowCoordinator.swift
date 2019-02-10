@@ -24,9 +24,9 @@ struct DetailFlowCoordinator: DetailFlowCoordinatorProtocol, PresenterProviding 
 
     private let navigationController: UINavigationController
 
-	private lazy var detailViewController: UIViewController = {
+	private lazy var detailViewController: DetailViewController = {
 		//let client = container.resolveUnwrapped(DetailAPIClientProtocol.self)
-		//let viewModel = DetailViewModel(client: client)
+		let viewModel = DetailViewModel() //client: client)
 
 		let storyboard = UIStoryboard(name: "DetailFlow", bundle: nil)
 		guard let viewController = storyboard
@@ -34,7 +34,7 @@ struct DetailFlowCoordinator: DetailFlowCoordinatorProtocol, PresenterProviding 
 		else {
 			fatalError("DetailFlowCoordinator: error instantiating DetailViewController")
 		}
-		//listViewController.viewModel = viewModel
+		viewController.viewModel = viewModel
 
 		return viewController
 	}()
@@ -46,7 +46,7 @@ struct DetailFlowCoordinator: DetailFlowCoordinatorProtocol, PresenterProviding 
     }
 
 	mutating func push(from navigationController: UINavigationController, topic: TopicResponse) {
-		//detailViewModel.topic = topic
+		detailViewController.viewModel.topic.value = topic
 		presenter.push(viewController: detailViewController, onto: navigationController, animated: true)
 	}
 

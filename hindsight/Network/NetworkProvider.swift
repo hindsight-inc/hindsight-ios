@@ -120,7 +120,7 @@ protocol NetworkProviderProtocol {
     ///
     /// - Parameter topic: Topic
     /// - Returns: Single<Result<TopicProtocol>>
-    func details(topic: TopicProtocol) -> Single<NetworkResult>
+    func topicDetail(topic: TopicResponse) -> Single<NetworkResult>
 }
 
 struct NetworkProvider: NetworkProviderProtocol {
@@ -171,7 +171,7 @@ struct NetworkProvider: NetworkProviderProtocol {
     ///
     /// - Parameter topic: Topic
     /// - Returns: Single<Result<TopicProtocol>>
-    func details(topic: TopicProtocol) -> Single<NetworkResult> {
+    func topicDetail(topic: TopicResponse) -> Single<NetworkResult> {
         return Variable(Result.error(.NotImplemented)).asObservable().asSingle()
     }
 }
@@ -321,7 +321,7 @@ struct MoyaNetworkProvider: NetworkProviderProtocol {
 	///
 	/// - Parameter topic: Topic
 	/// - Returns: Single<Result<TopicProtocol>>
-	func details(topic: TopicProtocol) -> Single<NetworkResult> {
+	func topicDetail(topic: TopicResponse) -> Single<NetworkResult> {
 		return Single<NetworkResult>.create { _ in
 			return Disposables.create()
 		}

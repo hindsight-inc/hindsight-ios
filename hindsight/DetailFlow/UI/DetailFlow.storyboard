@@ -179,6 +179,9 @@ Here is why.</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qvy-yc-Jqf"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="ZBj-ga-Hsh" id="74s-0f-79O"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UiT-CU-Pml" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
