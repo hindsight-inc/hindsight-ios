@@ -55,4 +55,8 @@ class ListViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
+
+	@IBAction func actionLogout() {
+		viewModel.logout()
+	}
 }

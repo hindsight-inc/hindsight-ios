@@ -13,6 +13,7 @@ protocol ListViewModelProtocol {
 	var nextClosure: TopicClosure { get }
 
 	func setup()
+	func logout()
 }
 
 struct ListViewModel: ListViewModelProtocol {
@@ -68,4 +69,9 @@ struct ListViewModel: ListViewModelProtocol {
         }
     }
     */
+
+	func logout() {
+		// Test only
+		SimpleAuthProvider().logout()
+	}
 }

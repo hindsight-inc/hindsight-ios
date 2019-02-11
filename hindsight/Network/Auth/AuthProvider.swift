@@ -12,6 +12,7 @@ protocol AuthProviderProtocol {
 	func save(token: String)
 	func token() -> String?
 	func isAuthenticated() -> Bool
+	func logout()
 }
 
 /// A simple auth provider for early development purpose only
@@ -29,5 +30,9 @@ struct SimpleAuthProvider: AuthProviderProtocol {
 
 	func isAuthenticated() -> Bool {
 		return UserDefaults.standard.string(forKey: tokenKey) != nil
+	}
+
+	func logout() {
+		UserDefaults.standard.set(nil, forKey: tokenKey)
 	}
 }
